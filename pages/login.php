@@ -32,31 +32,36 @@
   	<script async src="./lib/js/lib.js"></script>
   	<script type="text/javascript">
 	    $(function(){
-	        $('#fdangnhap').on('submit', function(donard){
-	            donard.preventDefault();
-	            var a = $(this).find('input[name="username"]').val().trim();
-	            var b = $(this).find('input[name="password"]').val().trim();
-	            $.ajax({
-					type: 'POST',
-					url: 'go',
-					data: {
-						for: "login",
-						taikhoan: a,
-						matkhau: MD5(b),
-						mobile: 0
-					},
-					beforeSend: function(){
+        $('#fdangnhap').on('submit', function(donard){
+          donard.preventDefault();
+          var a = $(this).find('input[name="username"]').val().trim();
+          var b = $(this).find('input[name="password"]').val().trim();
+          $.ajax({
+						type: 'POST',
+						url: 'go',
+						data: {
+							for: "login",
+							taikhoan: a,
+							matkhau: MD5(b),
+							mobile: 0
+						},
+						beforeSend: function(){
 						//showDiv();
-					}
-				}).done(function(ret){
-	                var val = JSON.parse(ret);
-	                if (val.trangthai == "1"){
-	                    window.location.href = "go?page=_main";
-	                } else {
-	                    alert("Đăng nhập thất bại! Vui lòng kiểm tra lại!");
-	                }
-	            });
-	        });
+						}
+					}).done(function(ret){
+        		var val = JSON.parse(ret);
+            if (val.trangthai == "1"){
+                window.location.href = "go?page=_main";
+            } else {
+                alert("Đăng nhập thất bại! Vui lòng kiểm tra lại!");
+            }
+          });
+        });
+        $('#fdangnhap').on('keypress',function(e) {
+			    if(e.which == 13) {
+		        $('#fdangnhap').submit();
+			    }
+				});
 	    });
 	</script>
 </body>

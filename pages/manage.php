@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Home</title>
+        <title>Home QR Code</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href="lib/images/vnpt_icon.ico" type="image/x-icon">
         <link href="lib/css/app_style.css" rel="stylesheet"/>

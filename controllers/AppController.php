@@ -49,5 +49,14 @@
             $stmt -> execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
+
+        public function FGetInfoQrCode($madonvi,$id){
+            $pdo = ConnectDb::getInstance()->getConnection();
+            $stmt = $pdo->prepare("call p_get_duong_dan(:madonvi,:id);");
+            $stmt -> bindParam(':madonvi', $madonvi, PDO::PARAM_STR);
+            $stmt -> bindParam(':id', $id, PDO::PARAM_STR);
+            $stmt -> execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
     }
 ?>

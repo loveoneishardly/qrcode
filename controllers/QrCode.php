@@ -54,8 +54,13 @@
             $stmt_update -> bindParam(':id', $id, PDO::PARAM_STR);
             $stmt_update -> bindParam(':url', $url, PDO::PARAM_STR);
             $stmt_update -> execute();
+
+            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+            $host = $_SERVER['HTTP_HOST'];
+            $request_uri = $_SERVER['REQUEST_URI'];
+            $current_url = $protocol . $host . $request_uri;
             
-            $data = isset($_GET['data']) ? $_GET['data'] : $url;
+            $data = isset($_GET['data']) ? $_GET['data'] : $current_url.'?check=_loading_page&param1='.$id.'&param2='.$madonvi;
             $logo = isset($_GET['logo']) ? $_GET['logo'] : './lib/images/vnpt.png';
             $sdir = explode("/",$_SERVER['REQUEST_URI']);
             $dir = str_replace($sdir[count($sdir)-1],"",$_SERVER['REQUEST_URI']);

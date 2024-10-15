@@ -23,8 +23,8 @@
             case "_index":
                 include("pages/login.php");
             break;
-            case "_index1":
-                include("pages/manage.php");
+            case "_loading_page":
+                include("pages/check_page_edit.php");
             break;
             default:
                 include("pages/ferror.php");
@@ -45,6 +45,12 @@
                 $madonvi = $_SESSION["madv"];
                 $res = (new CreateQRCode())->CreateQRHanhChinhCong($madonvi,$id);
                 echo $res;
+            break;
+            case "_get_info_idqrcode":
+                $id = $_POST['idqrcode'];
+                $madonvi = $_POST["madonvi"];
+                $res = (new AppController())->FGetInfoQrCode($madonvi,$id);
+                echo json_encode($res);
             break;
             case "_logout":
                 echo (new AppController())->FLogout_web();
