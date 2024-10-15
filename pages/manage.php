@@ -3,6 +3,7 @@
     <head>
         <title>Home QR Code</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta content="IE=edge,chrome=1" />
         <link rel="icon" href="lib/images/vnpt_icon.ico" type="image/x-icon">
         <link href="lib/css/app_style.css" rel="stylesheet"/>
         <script src="lib/js/jquery-1.11.1.min.js"></script>
@@ -11,7 +12,7 @@
         <link rel="stylesheet" type="text/css" href="lib/css/css/brands.css">
         <link rel="stylesheet" type="text/css" href="lib/css/css/solid.css">
         <link rel="stylesheet" href="lib/jqwidgets/styles/jqx.base.css" type="text/css" />
-        <script type="text/javascript" src="lib/js/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="lib/js/scripts/demos.js"></script>
         <script type="text/javascript" src="lib/jqwidgets/jqxcore.js"></script>
         <script type="text/javascript" src="lib/jqwidgets/jqxdata.js"></script> 
         <script type="text/javascript" src="lib/jqwidgets/jqxbuttons.js"></script>
@@ -46,6 +47,12 @@
         <script type="text/javascript" src="lib/jqwidgets/jqxtree.js"></script>
         <script type="text/javascript" src="lib/jqwidgets/jqxexpander.js"></script>
         <script type="text/javascript" src="lib/jqwidgets/jqxsplitter.js"></script>
+        <script type="text/javascript" src="lib/js/jBox.js"></script>
+        <script type="text/javascript" src="lib/js/warning.js"></script>
+        <script type="text/javascript" src="lib/js/cute-alert.js"></script>
+        <link rel="stylesheet" type="text/css" href="lib/css/jBox.css">
+        <link href="lib/css/style_cute.css" rel="stylesheet">
+
     </head>
     <style type="text/css">
         #top-up {
@@ -86,6 +93,7 @@
             </div>
             <div class="w3-col">
                 <input type="hidden" id="id_qr_code" name="id_qr_code" />
+                <input type="hidden" id="qr_madonvi" name="qr_madonvi" />
                 <hr>
                 <table style="width: 100%">
                     <tr>
@@ -106,6 +114,19 @@
     </div>
     <div title="Về đầu trang" id="top-up">
     <i class="fas fa-arrow-circle-up"></i></div>
+    
+    <div id="qr_themmoi_thongtin" style="display:none;">
+        <div id='qr_code_tinh_tp' disable=true>
+        </div>
+        <div id='qr_code_quan_huyen'>
+        </div>
+        <div id='qr_code_xa_phuong'>
+        </div>
+        <div id='qr_code_linh_vuc'>
+        </div>
+        <div id='qr_code_thu_tuc'>
+        </div>
+    </div>
     <script type="text/javascript">
         var source_listqrcode;
         var offset = 50;
@@ -113,11 +134,35 @@
         var currentTab = 0;
         var trangthai = ""; //$("#session_u").val();
         $(document).ready(function () {
+            var modal_them_thongtin = new jBox('Modal', {
+                title: "THÊM THÔNG TIN QR MỚI",
+                overlay: true,
+                width: window.innerWidth/1.05,
+                height: window.innerHeight/1.15  ,
+                responsiveWidth: true,
+                content: $('#qr_themmoi_thongtin'),
+                animation: {
+                    open: 'move:right',
+                    close: 'slide:top'
+                },
+                position: {
+                    x: 'center'
+                },
+                draggable: 'title',
+                closeButton: 'title',
+                fixed: true,
+                closeOnClick: false,
+                zIndex: 999999
+            });
+            
+
             $("#xemdanhsach").jqxButton({ width: 200, height: 40 });
             $("#taoqrcode").jqxButton({ width: 200, height: 40 });
             $("#qr_thoat").jqxButton({ width: 200, height: 40 });
             $("#logo_update").jqxButton({ width: 200, height: 40 });
             $("#themmoiqrcode").jqxButton({ width: 200, height: 40 });
+            
+            
             $(window).scroll(function () {
                 if ($(this).scrollTop() > offset)
                 $('#top-up').fadeIn(duration);else
@@ -140,7 +185,7 @@
                     { name: 'TRANG_THAI'},
                     { name: 'TIME_CREATE'}
                 ],
-                url: 'go?for=loadlistqrcode&iddonvi=1',
+                url: 'go?for=loadlistqrcode&iddonvi='+ <?php echo $_SESSION["madv"] ?>,
                 cache: false,
                 pagesize: 50,
                 pager: function (pagenum, pagesize, oldpagenum) {
@@ -179,12 +224,14 @@
                 var rowBoundIndex = args.rowindex;
                 var selectedRowData_list_qrcode = $('#listqrcode').jqxGrid('getrowdata', rowBoundIndex);
                 $("#id_qr_code").val(selectedRowData_list_qrcode.ID);
+                $("#qr_madonvi").val(selectedRowData_list_qrcode.ID_DON_VI);
             });
             $("#xemdanhsach").click(function(){
                 loadDS_qrCode();
             });
             $("#taoqrcode").click(function(){
                 var idqrcode = $("#id_qr_code").val();
+                var madonvi = $("#qr_madonvi").val();
                 if (idqrcode){
                     location.href='#contentqrcode';
                     $.ajax({
@@ -192,7 +239,8 @@
                         url: 'go',
                         data: {
                             for: "_taomaqrcode",
-                            idqrcode: idqrcode
+                            idqrcode: idqrcode,
+                            madonvi: madonvi
                         }
                     }).done(function(data){
                         $('#QRCode').attr('src', data);
@@ -201,6 +249,37 @@
                     alert("Chưa chọn lĩnh vực cần tạo!");
                 }
             });
+            $("#themmoiqrcode").click(function(){
+                modal_them_thongtin.open();
+                var soure_list_tinh = {
+                    datatype: "json",
+                    datafields: [
+                        { name: 'ID_TINH' },
+                        { name: 'TEN_TINH' }
+                    ],
+                    url: "go?for=loadlisttinh",
+                    async: false
+                };
+                var dataAdapter_tinh = new $.jqx.dataAdapter(soure_list_tinh, {autoBind: true, async: false});
+                $("#qr_code_tinh_tp").jqxDropDownList({selectedIndex: 0, source: dataAdapter_tinh, displayMember: "TEN_TINH", valueMember: "ID_TINH", width: 250, height: 30, placeHolder: "Chọn Tỉnh"});
+
+                var soure_list_huyen = {
+                    datatype: "json",
+                    datafields: [
+                        { name: 'ID_HUYEN' },
+                        { name: 'TEN_HUYEN' }
+                    ],
+                    url: "go?for=loadlisthuyen",
+                    async: true
+                };
+                var dataAdapter_huyen = new $.jqx.dataAdapter(soure_list_huyen);
+                $("#qr_code_quan_huyen").jqxDropDownList({source: dataAdapter_huyen, displayMember: "TEN_HUYEN", valueMember: "ID_HUYEN", placeHolder: "Chọn Quận huyện", width: 250, height: 30});
+
+
+                $("#qr_code_xa_phuong").jqxDropDownList({ source: soure_list_xa, placeHolder: "Chọn Phường xã", width: 250, height: 30});
+                $("#qr_code_linh_vuc").jqxDropDownList({ source: soure_list_linhvuc, placeHolder: "Chọn Lĩnh vực", width: 250, height: 30});
+                $("#qr_code_thu_tuc").jqxDropDownList({ source: soure_list_thutuc, placeHolder: "Chọn Thủ tục", width: 250, height: 30});
+            });
             $("#qr_thoat").click(function(){
                 $.post("go", {for:"_logout"}, function(data) {
                     if(data){
@@ -208,9 +287,10 @@
                     }
                 });
             });
+            
         });
         function loadDS_qrCode(){
-            var url_qrcode = "go?for=loadlistqrcode&iddonvi=1";
+            var url_qrcode = "go?for=loadlistqrcode&iddonvi="+ <?php echo $_SESSION["madv"] ?>;
             source_listqrcode.url = url_qrcode;
             $("#listqrcode").jqxGrid('updatebounddata');
         }

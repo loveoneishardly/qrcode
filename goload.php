@@ -42,7 +42,7 @@
             break;
             case "_taomaqrcode":
                 $id = $_POST['idqrcode'];
-                $madonvi = $_SESSION["madv"];
+                $madonvi = $_POST["madonvi"];
                 $res = (new CreateQRCode())->CreateQRHanhChinhCong($madonvi,$id);
                 echo $res;
             break;
@@ -66,6 +66,18 @@
                 if (isset($_SESSION["madv"])){
                     $iddonvi = $_GET['iddonvi'];
                     $res = (new AppController())->FLoadDSQRCode($iddonvi);
+                    echo json_encode($res);
+                }
+            break;
+            case "loadlisttinh":
+                if (isset($_SESSION["madv"])){
+                    $res = (new AppController())->FLoadDSTinh();
+                    echo json_encode($res);
+                }
+            break;
+            case "loadlisthuyen":
+                if (isset($_SESSION["madv"])){
+                    $res = (new AppController())->FLoadDSHuyen();
                     echo json_encode($res);
                 }
             break;

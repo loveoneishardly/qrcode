@@ -7,13 +7,11 @@
         public function CreateQRHanhChinhCong($madonvi,$id){
             $imgname ="qrcodefarm.png";
             $loaiurl = "1";
-            $tinh = "";
-            $huyen = "";
-            $xa = "";
-            $idtinh = "";
-            $idhuyen = "";
-            $idxa = "";
-            $malinhvuc = "";
+            $url_ma = "";
+            $url_madonvi = "";
+            $url_organizationGuid = "";
+            $url_ttId = "";
+            $url_ttGuid = "";
             $duongdan = "";
             $checkupdate = "";
 
@@ -24,13 +22,11 @@
             $stmt -> execute();
             if($stmt->rowCount() > 0){
                 $row = $stmt->fetch();
-                $tinh = $row["TEN_TINH"];
-                $huyen = $row["TEN_HUYEN"];
-                $xa = $row["TEN_XA"];
-                $idtinh = $row["ID_TINH"];
-                $idhuyen = $row["ID_HUYEN"];
-                $idxa = $row["ID_XA"];
-                $malinhvuc = $row["MA_LINH_VUC"];
+                $url_ma = $row["ITEM_MA"];
+                $url_madonvi = $row["XP_CODE"];
+                $url_organizationGuid = $row["XP_GUID"];
+                $url_ttId = $row["ITEM_ID"];
+                $url_ttGuid = $row["ITEM_GUID"];
             }
 
             $pdo_url = ConnectDb::getInstance()->getConnection();
@@ -42,11 +38,9 @@
                 $duongdan = $row_url["DUONG_DAN"];
             }
 
-            $tinhThanh = urlencode($tinh);
-            $quanHuyen = urlencode($huyen);
-            $phuongXa = urlencode($xa);
+            $url = "$duongdan?ma=$url_ma&maDonVi=$url_madonvi&organizationGuid=$url_organizationGuid&ttId=$url_ttId&ttGuid=$url_ttGuid";
 
-            $url = "$duongdan?tu_khoa=&bo_nganh=&tinh_thanh=$tinhThanh&so=&quan_huyen=$quanHuyen&phuong_xa=$phuongXa&ma_tt=$malinhvuc&id_tinh_thanh=$idtinh&id_quan_huyen=$idhuyen&id_phuong_xa=$idxa&id_so=null&id_bo_nganh=-1";
+            //https://dichvucong.soctrang.gov.vn/nop-ho-so?ma=1.004946.000.00.00.H51&maDonVi=000.18.29.H51&organizationGuid=11f00852-7fba-48f5-93aa-6927ef464f9c&ttId=13116&ttGuid=fd1f1918-de28-404d-91e0-8b18d7a2ac71
 
             $pdo_update = ConnectDb::getInstance()->getConnection();
             $stmt_update = $pdo_update->prepare("call p_update_url_qrcode(:madonvi,:id,:url);");

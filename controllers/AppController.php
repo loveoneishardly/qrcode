@@ -58,5 +58,19 @@
             $stmt -> execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
+
+        public function FLoadDSTinh(){
+            $pdo = ConnectDb::getInstance()->getConnection();
+            $stmt = $pdo->prepare("call p_get_tinh();");
+            $stmt -> execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function FLoadDSHuyen(){
+            $pdo = ConnectDb::getInstance()->getConnection();
+            $stmt = $pdo->prepare("call p_get_huyen();");
+            $stmt -> execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
     }
 ?>
