@@ -124,46 +124,50 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="control-label">Tỉnh/ Thành phố</label>
-                                <select class="form-control" id="qr_tentinh" name="qr_tentinh" disabled="true" readonly=true >
-                                    <option value="-1">-- Chọn Tỉnh/ Thành phố</option>
+                                <select class="form-control" id="qr_tentinh" name="qr_tentinh">
+                                    <option value="-1">-- Chọn Tỉnh/ Thành phố --</option>
                                 </select >
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Quận/ Huyện/ Thị xã</label>
+                                <label class="control-label">Tổ chức Quận/ Huyện/ Thị xã</label>
                                 <select class="form-control" id="qr_tenhuyen" name="qr_tenhuyen" >
-                                    <option value="-1">-- Chọn Quận/ Huyện/ Thị xã</option>
+                                    <option value="-1">-- Chọn Tổ chức Quận/ Huyện/ Thị xã --</option>
                                 </select >
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Xã/ Phường/ Thị trấn</label>
                                 <select class="form-control" id="qr_tenxa" name="qr_tenxa" >
-                                    <option value="-1">-- Chọn Xã/ Phường/ Thị trấn</option>
+                                    <option value="-1">-- Chọn Xã/ Phường/ Thị trấn --</option>
                                 </select >
                             </div>
                         </div>
                         <div class="col-lg-6 offset-lg-0">
                             <div class="form-group">
+                                <label class="control-label">Loại thủ tục</label>
+                                <select class="form-control" id="qr_loai_thutuc" name="qr_loai_thutuc">
+                                    <option value="0">-- Tất cả --</option>
+                                    <option value="1">Công dân</option>
+                                    <option value="2">Tổ chức</option>
+                                </select >
+                            </div>
+                            <div class="form-group">
                                 <label class="control-label">Lĩnh vực</label>
                                 <select class="form-control" id="qr_linhvuc_hc" name="qr_linhvuc_hc">
-                                    <option value="-1">-- Chọn Lĩnh vực</option>
+                                    <option value="-1">-- Chọn Lĩnh vực --</option>
                                 </select >
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Thủ tục</label>
                                 <select class="form-control" id="qr_thutuc_hc" name="qr_thutuc_hc">
-                                    <option value="-1">-- CHọn thủ tục</option>
+                                    <option value="-1">-- Chọn thủ tục --</option>
                                 </select >
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Đơn vị tạo</label>
-                                <input id="thongtin_hoten" name="qr_donvitao" name="qr_donvitao" class="form-control" type="text" disabled="true" readonly=true>
                             </div>
                         </div>
                     </div>
                     <div class="tile-footer">
                         <div class="bs-component" style="margin-left:20px !important">
-                            <button id="qr_luu_thongtin" name="chitiet_vbcc_luu" class="btn btn-primary" type="button" style="margin-bottom:2px !important"><i class="fa fa-fw fa-lg fa-check-circle"></i>LƯU THÔNG TIN</button>
-                            <button id="qr_dong_themthongtin" name="chitiet_vbcc_dong" class="btn btn-secondary" type="button" style="margin-bottom:2px !important"><i class="fa fa-fw fa-lg fa-times"></i>ĐÓNG</button>
+                            <button id="qr_luu_thongtin" name="qr_luu_thongtin" class="btn btn-primary" type="button" style="margin-bottom:2px !important"><i class="fa fa-fw fa-lg fa-check-circle"></i>LƯU THÔNG TIN</button>
+                            <button id="qr_dong_themthongtin" name="qr_dong_themthongtin" class="btn btn-secondary" type="button" style="margin-bottom:2px !important"><i class="fa fa-fw fa-lg fa-times"></i>ĐÓNG</button>
                         </div>
                     </div>
                 </div>
@@ -181,7 +185,7 @@
                 title: "THÊM THÔNG TIN QR MỚI",
                 overlay: true,
                 width: window.innerWidth/1.05,
-                height: window.innerHeight/2.1  ,
+                height: window.innerHeight/1.6  ,
                 responsiveWidth: true,
                 content: $('#qr_themmoi_thongtin'),
                 animation: {
@@ -203,7 +207,6 @@
             $("#qr_thoat").jqxButton({ width: 200, height: 40 });
             $("#logo_update").jqxButton({ width: 200, height: 40 });
             $("#themmoiqrcode").jqxButton({ width: 200, height: 40 });
-            
             
             $(window).scroll(function () {
                 if ($(this).scrollTop() > offset)
@@ -296,6 +299,31 @@
             });
             $("#themmoiqrcode").click(function(){
                 modal_them_thongtin.open();
+                var maloaithutuc = $("#qr_loai_thutuc").val();
+                load_dsTinh();
+            });
+            $("#qr_tentinh").change(function(){
+                var matinh = $("#qr_tentinh").val();
+                load_dsHuyen(matinh);
+            });
+            $("#qr_tenhuyen").change(function(){
+                var mahuyen = $("#qr_tenhuyen").val();
+                var maloaithutuc = $("#qr_loai_thutuc").val();
+                var malinhvuc = $("#qr_linhvuc_hc").val();
+                load_dsXaPhuong(mahuyen);
+                load_list_linhvuc(mahuyen,maloaithutuc);
+                load_list_thutuc(mahuyen,maloaithutuc,malinhvuc);
+            });
+            $("#qr_linhvuc_hc").change(function(){
+                var maloaithutuc = $("#qr_loai_thutuc").val();
+                var mahuyen = $("#qr_tenhuyen").val();
+                var malinhvuc = $("#qr_linhvuc_hc").val();
+                load_list_thutuc(mahuyen,maloaithutuc,malinhvuc);
+            });
+            $("#qr_loai_thutuc").change(function(){
+                var maloaithutuc = $("#qr_loai_thutuc").val();
+                var mahuyen = $("#qr_tenhuyen").val();
+                load_list_linhvuc(mahuyen,maloaithutuc);
             });
             $("#qr_thoat").click(function(){
                 $.post("go", {for:"_logout"}, function(data) {
@@ -304,12 +332,133 @@
                     }
                 });
             });
-            
+            $("#qr_luu_thongtin").click(function(){
+                var qr_matinh = $("#qr_tentinh").val();
+                var qr_mahuyen = $("#qr_tenhuyen").val();
+                var qr_maxa = $("#qr_tenxa").val();
+                var qr_ma_thutuc_linhvuc = $("#qr_thutuc_hc").val();
+                var qr_id_code = $("#id_qr_code").val();
+                $.ajax({
+                    type: 'POST',
+                    url: 'go',
+                    data: {
+                        for: "_qrcode_luu_thongtin",
+                        qr_id_code: qr_id_code,
+                        qr_matinh: qr_matinh,
+                        qr_mahuyen: qr_mahuyen,
+                        qr_maxa: qr_maxa,
+                        qr_ma_thutuc_linhvuc: qr_ma_thutuc_linhvuc
+                    }
+                }).done(function(data){
+                    var val = JSON.parse(data);
+                    if (val[0].KET_QUA > 0){
+                        alert('Lưu thông tin thành công!');
+                        loadDS_qrCode();
+                    } else {
+                        alert('Không có thông tin gì thay đổi! Vui lòng kiểm tra lại!');
+                    }
+                });
+            });
+            $("#qr_dong_themthongtin").click(function(){
+                modal_them_thongtin.close();
+            });
         });
         function loadDS_qrCode(){
             var url_qrcode = "go?for=loadlistqrcode&iddonvi="+ <?php echo $_SESSION["madv"] ?>;
             source_listqrcode.url = url_qrcode;
             $("#listqrcode").jqxGrid('updatebounddata');
+        }
+        function load_dsTinh(){
+            $.ajax({
+                type: 'GET',
+                url: 'go',
+                data: {
+                    for: "loadlisttinh"
+                }
+            }).done(function (data) {
+                if (data) {
+                    var val = JSON.parse(data);
+                    $("#qr_tentinh option").not(':first').remove();
+                    $.each(val, function (i) {
+                        $("<option value='" + val[i].ID_TINH + "'>" + val[i].TEN_TINH + "</option>").appendTo("#qr_tentinh");
+                    });
+                }
+            });
+        }
+        function load_dsHuyen(matinh){
+            $.ajax({
+                type: 'GET',
+                url: 'go',
+                data: {
+                    for: "loadlisthuyen",
+                    matinh: matinh
+                }
+            }).done(function (data) {
+                if (data) {
+                    var val = JSON.parse(data);
+                    $("#qr_tenhuyen option").not(':first').remove();
+                    $.each(val, function (i) {
+                        $("<option value='" + val[i].ID_HUYEN + "'>" + val[i].TEN_HUYEN + "</option>").appendTo("#qr_tenhuyen");
+                    });
+                }
+            });
+        }
+        function load_dsXaPhuong(mahuyen){
+            $.ajax({
+                type: 'GET',
+                url: 'go',
+                data: {
+                    for: "loadlistxa",
+                    mahuyen: mahuyen
+                }
+            }).done(function (data) {
+                if (data) {
+                    var val = JSON.parse(data);
+                    $("#qr_tenxa option").not(':first').remove();
+                    $.each(val, function (i) {
+                        $("<option value='" + val[i].ID_XA + "'>" + val[i].TEN_XA + "</option>").appendTo("#qr_tenxa");
+                    });
+                }
+            });
+        }
+        function load_list_linhvuc(organization,loaithutuc){
+            $.ajax({
+                type: 'GET',
+                url: 'go',
+                data: {
+                    for: "loadlistlinhvuc",
+                    organization: organization,
+                    loaithutuc: loaithutuc
+                }
+            }).done(function (data) {
+                if (data) {
+                    var val = JSON.parse(data);
+                    $("#qr_linhvuc_hc option").not(':first').remove();
+                    $.each(val, function (i) {
+                        $("<option value='" + val[i].LINH_VUC_MA + "'>" + val[i].LINH_VUC_TEN + "</option>").appendTo("#qr_linhvuc_hc");
+                    });
+                }
+            });
+        }
+        function load_list_thutuc(organization,loaithutuc,malinhvuc){
+            $.ajax({
+                type: 'GET',
+                url: 'go',
+                data: {
+                    for: "loadlistthutuc",
+                    organization: organization,
+                    loaithutuc: loaithutuc,
+                    malinhvuc: malinhvuc
+                }
+            }).done(function (data) {
+                if (data) {
+                    var val = JSON.parse(data);
+                    $("#qr_thutuc_hc option").not(':first').remove();
+                    $.each(val, function (i) {
+                        $("<option value='" + val[i].ID_LINH_VUC + "'>" + val[i].TEN_LINH_VUC + "</option>").appendTo("#qr_thutuc_hc");
+                    });
+                }
+            });
         }
     </script>
 </body>

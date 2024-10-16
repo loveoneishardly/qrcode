@@ -66,9 +66,51 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        public function FLoadDSHuyen(){
+        public function FLoadDSHuyen($matinh){
             $pdo = ConnectDb::getInstance()->getConnection();
-            $stmt = $pdo->prepare("call p_get_huyen();");
+            $stmt = $pdo->prepare("call p_get_huyen(:matinh);");
+            $stmt -> bindParam(':matinh', $matinh, PDO::PARAM_STR);
+            $stmt -> execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function FLoadDSXa($mahuyen){
+            $pdo = ConnectDb::getInstance()->getConnection();
+            $stmt = $pdo->prepare("call p_get_xa(:mahuyen);");
+            $stmt -> bindParam(':mahuyen', $mahuyen, PDO::PARAM_STR);
+            $stmt -> execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function FLoadDSLinhVuc($organization,$loaithutuc){
+            $pdo = ConnectDb::getInstance()->getConnection();
+            $stmt = $pdo->prepare("call p_get_linhvuc(:organization,:loaithutuc);");
+            $stmt -> bindParam(':organization', $organization, PDO::PARAM_STR);
+            $stmt -> bindParam(':loaithutuc', $loaithutuc, PDO::PARAM_STR);
+            $stmt -> execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function FLoadDSThuTuc($organization,$loaithutuc,$malinhvuc){
+            $pdo = ConnectDb::getInstance()->getConnection();
+            $stmt = $pdo->prepare("call p_get_thutuc(:organization,:loaithutuc,:malinhvuc);");
+            $stmt -> bindParam(':organization', $organization, PDO::PARAM_STR);
+            $stmt -> bindParam(':loaithutuc', $loaithutuc, PDO::PARAM_STR);
+            $stmt -> bindParam(':malinhvuc', $malinhvuc, PDO::PARAM_STR);
+            $stmt -> execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function FLuuThongTinQRCode($idqrcode,$madonvi,$matinh,$mahuyen,$maxa,$mathutuc,$manhanvien){
+            $pdo = ConnectDb::getInstance()->getConnection();
+            $stmt = $pdo->prepare("call p_luu_thontin_qr_code(:idqrcode,:madonvi,:matinh,:mahuyen,:maxa,:mathutuc,:manhanvien);");
+            $stmt -> bindParam(':idqrcode', $idqrcode, PDO::PARAM_STR);
+            $stmt -> bindParam(':madonvi', $madonvi, PDO::PARAM_STR);
+            $stmt -> bindParam(':matinh', $matinh, PDO::PARAM_STR);
+            $stmt -> bindParam(':mahuyen', $mahuyen, PDO::PARAM_STR);
+            $stmt -> bindParam(':maxa', $maxa, PDO::PARAM_STR);
+            $stmt -> bindParam(':mathutuc', $mathutuc, PDO::PARAM_STR);
+            $stmt -> bindParam(':manhanvien', $manhanvien, PDO::PARAM_STR);
             $stmt -> execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }

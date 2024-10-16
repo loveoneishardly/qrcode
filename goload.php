@@ -52,6 +52,17 @@
                 $res = (new AppController())->FGetInfoQrCode($madonvi,$id);
                 echo json_encode($res);
             break;
+            case "_qrcode_luu_thongtin":
+                $madonvi = $_SESSION["madv"];
+                $matinh = $_POST['qr_matinh'];
+                $mahuyen = $_POST["qr_mahuyen"];
+                $maxa = $_POST['qr_maxa'];
+                $manhanvien = $_SESSION["manv"];
+                $mathutuc = $_POST["qr_ma_thutuc_linhvuc"];
+                $idqrcode = $_POST["qr_id_code"];
+                $res = (new AppController())->FLuuThongTinQRCode($idqrcode,$madonvi,$matinh,$mahuyen,$maxa,$mathutuc,$manhanvien);
+                echo json_encode($res);
+            break;
             case "_logout":
                 echo (new AppController())->FLogout_web();
             break;
@@ -77,7 +88,32 @@
             break;
             case "loadlisthuyen":
                 if (isset($_SESSION["madv"])){
-                    $res = (new AppController())->FLoadDSHuyen();
+                    $matinh = $_GET['matinh'];
+                    $res = (new AppController())->FLoadDSHuyen($matinh);
+                    echo json_encode($res);
+                }
+            break;
+            case "loadlistxa":
+                if (isset($_SESSION["madv"])){
+                    $mahuyen = $_GET['mahuyen'];
+                    $res = (new AppController())->FLoadDSXa($mahuyen);
+                    echo json_encode($res);
+                }
+            break;
+            case "loadlistlinhvuc":
+                if (isset($_SESSION["madv"])){
+                    $organization = $_GET['organization'];
+                    $loaithutuc = $_GET['loaithutuc'];
+                    $res = (new AppController())->FLoadDSLinhVuc($organization,$loaithutuc);
+                    echo json_encode($res);
+                }
+            break;
+            case "loadlistthutuc":
+                if (isset($_SESSION["madv"])){
+                    $organization = $_GET['organization'];
+                    $loaithutuc = $_GET['loaithutuc'];
+                    $malinhvuc = $_GET['malinhvuc'];
+                    $res = (new AppController())->FLoadDSThuTuc($organization,$loaithutuc,$malinhvuc);
                     echo json_encode($res);
                 }
             break;
