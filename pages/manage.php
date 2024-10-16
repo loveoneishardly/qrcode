@@ -252,16 +252,16 @@
                 autorowheight: false,
                 altrows: true,
                 columns: [
-                    { text: 'ID QR CODE', datafield: 'ID', width: 100, align: 'center', cellsalign: 'center'},
-                    { text: 'Mã Đơn Vị', datafield: 'ID_DON_VI', width: 100, align: 'center', cellsalign: 'center'},
+                    { text: 'ID QR CODE', datafield: 'ID', width: 120, align: 'center', cellsalign: 'center'},
+                    { text: 'Mã Đơn Vị', datafield: 'ID_DON_VI', width: 120, align: 'center', cellsalign: 'center'},
                     { text: 'Tên Đơn Vị', datafield: 'TENDONVI', width: 400, align: 'center', cellsalign: 'left'},
                     { text: 'Lĩnh Vực', datafield: 'TEN_LINH_VUC', width: 500, align: 'center', cellsalign: 'center'},
-                    { text: 'Tên Tỉnh/Thành phố', datafield: 'TEN_TINH', width: 200, align: 'center', cellsalign: 'center'},
-                    { text: 'Tên Quận/Huyện/Thị xã', datafield: 'TEN_HUYEN', width: 200, align: 'center', cellsalign: 'center'},
-                    { text: 'Tên Xã/Phường/Trị trấn', datafield: 'TEN_XA', width: 200, align: 'center', cellsalign: 'center'},
-                    { text: 'Người Tạo', datafield: 'TEN_NHAN_VIEN', width: 200, align: 'center', cellsalign: 'center'},
-                    { text: 'Trạng Thái', datafield: 'TRANG_THAI', width: 200, align: 'center', cellsalign: 'center'},
-                    { text: 'Thời Gian Tạo', datafield: 'TIME_CREATE', width: 200, align: 'center', cellsalign: 'center'}
+                    { text: 'Tên Tỉnh/Thành phố', datafield: 'TEN_TINH', width: 230, align: 'center', cellsalign: 'center'},
+                    { text: 'Tên Quận/Huyện/Thị xã', datafield: 'TEN_HUYEN', width: 230, align: 'center', cellsalign: 'center'},
+                    { text: 'Tên Xã/Phường/Trị trấn', datafield: 'TEN_XA', width: 230, align: 'center', cellsalign: 'center'},
+                    { text: 'Người Tạo', datafield: 'TEN_NHAN_VIEN', width: 230, align: 'center', cellsalign: 'center'},
+                    { text: 'Trạng Thái', datafield: 'TRANG_THAI', width: 230, align: 'center', cellsalign: 'center'},
+                    { text: 'Thời Gian Tạo', datafield: 'TIME_CREATE', width: 230, align: 'center', cellsalign: 'center'}
                 ]
             });
             $('#listqrcode').on('rowclick', function (event) {
