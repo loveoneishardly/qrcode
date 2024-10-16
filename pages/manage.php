@@ -52,6 +52,7 @@
         <script type="text/javascript" src="lib/js/cute-alert.js"></script>
         <link rel="stylesheet" type="text/css" href="lib/css/jBox.css">
         <link href="lib/css/style_cute.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="./lib/css/main.css">
 
     </head>
     <style type="text/css">
@@ -116,15 +117,57 @@
     <i class="fas fa-arrow-circle-up"></i></div>
     
     <div id="qr_themmoi_thongtin" style="display:none;">
-        <div id='qr_code_tinh_tp' disable=true>
-        </div>
-        <div id='qr_code_quan_huyen'>
-        </div>
-        <div id='qr_code_xa_phuong'>
-        </div>
-        <div id='qr_code_linh_vuc'>
-        </div>
-        <div id='qr_code_thu_tuc'>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <div class="row" style="margin-bottom: 2rem;">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="control-label">Tỉnh/ Thành phố</label>
+                                <select class="form-control" id="qr_tentinh" name="qr_tentinh" disabled="true" readonly=true >
+                                    <option value="-1">-- Chọn Tỉnh/ Thành phố</option>
+                                </select >
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Quận/ Huyện/ Thị xã</label>
+                                <select class="form-control" id="qr_tenhuyen" name="qr_tenhuyen" >
+                                    <option value="-1">-- Chọn Quận/ Huyện/ Thị xã</option>
+                                </select >
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Xã/ Phường/ Thị trấn</label>
+                                <select class="form-control" id="qr_tenxa" name="qr_tenxa" >
+                                    <option value="-1">-- Chọn Xã/ Phường/ Thị trấn</option>
+                                </select >
+                            </div>
+                        </div>
+                        <div class="col-lg-6 offset-lg-0">
+                            <div class="form-group">
+                                <label class="control-label">Lĩnh vực</label>
+                                <select class="form-control" id="qr_linhvuc_hc" name="qr_linhvuc_hc">
+                                    <option value="-1">-- Chọn Lĩnh vực</option>
+                                </select >
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Thủ tục</label>
+                                <select class="form-control" id="qr_thutuc_hc" name="qr_thutuc_hc">
+                                    <option value="-1">-- CHọn thủ tục</option>
+                                </select >
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Đơn vị tạo</label>
+                                <input id="thongtin_hoten" name="qr_donvitao" name="qr_donvitao" class="form-control" type="text" disabled="true" readonly=true>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile-footer">
+                        <div class="bs-component" style="margin-left:20px !important">
+                            <button id="qr_luu_thongtin" name="chitiet_vbcc_luu" class="btn btn-primary" type="button" style="margin-bottom:2px !important"><i class="fa fa-fw fa-lg fa-check-circle"></i>LƯU THÔNG TIN</button>
+                            <button id="qr_dong_themthongtin" name="chitiet_vbcc_dong" class="btn btn-secondary" type="button" style="margin-bottom:2px !important"><i class="fa fa-fw fa-lg fa-times"></i>ĐÓNG</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script type="text/javascript">
@@ -138,7 +181,7 @@
                 title: "THÊM THÔNG TIN QR MỚI",
                 overlay: true,
                 width: window.innerWidth/1.05,
-                height: window.innerHeight/1.15  ,
+                height: window.innerHeight/2.1  ,
                 responsiveWidth: true,
                 content: $('#qr_themmoi_thongtin'),
                 animation: {
@@ -155,7 +198,6 @@
                 zIndex: 999999
             });
             
-
             $("#xemdanhsach").jqxButton({ width: 200, height: 40 });
             $("#taoqrcode").jqxButton({ width: 200, height: 40 });
             $("#qr_thoat").jqxButton({ width: 200, height: 40 });
@@ -197,20 +239,23 @@
                 width: '100%',
                 height: '550',
                 columnsresize: true,
-                showfilterrow: true,
+                showfilterrow: false,
                 filterable: true,
                 editable: false,
                 selectionmode: 'singlerow',
                 showstatusbar: true,
-                statusbarheight: 32,
+                statusbarheight: 25,
                 showaggregates: true,
                 pageable: true,
                 pagermode: 'simple',
+                enabletooltips: true,
+                autorowheight: false,
+                altrows: true,
                 columns: [
                     { text: 'ID QR CODE', datafield: 'ID', width: 100, align: 'center', cellsalign: 'center'},
                     { text: 'Mã Đơn Vị', datafield: 'ID_DON_VI', width: 100, align: 'center', cellsalign: 'center'},
                     { text: 'Tên Đơn Vị', datafield: 'TENDONVI', width: 400, align: 'center', cellsalign: 'left'},
-                    { text: 'Lĩnh Vực', datafield: 'TEN_LINH_VUC', width: 300, align: 'center', cellsalign: 'center'},
+                    { text: 'Lĩnh Vực', datafield: 'TEN_LINH_VUC', width: 500, align: 'center', cellsalign: 'center'},
                     { text: 'Tên Tỉnh/Thành phố', datafield: 'TEN_TINH', width: 200, align: 'center', cellsalign: 'center'},
                     { text: 'Tên Quận/Huyện/Thị xã', datafield: 'TEN_HUYEN', width: 200, align: 'center', cellsalign: 'center'},
                     { text: 'Tên Xã/Phường/Trị trấn', datafield: 'TEN_XA', width: 200, align: 'center', cellsalign: 'center'},
@@ -251,34 +296,6 @@
             });
             $("#themmoiqrcode").click(function(){
                 modal_them_thongtin.open();
-                var soure_list_tinh = {
-                    datatype: "json",
-                    datafields: [
-                        { name: 'ID_TINH' },
-                        { name: 'TEN_TINH' }
-                    ],
-                    url: "go?for=loadlisttinh",
-                    async: false
-                };
-                var dataAdapter_tinh = new $.jqx.dataAdapter(soure_list_tinh, {autoBind: true, async: false});
-                $("#qr_code_tinh_tp").jqxDropDownList({selectedIndex: 0, source: dataAdapter_tinh, displayMember: "TEN_TINH", valueMember: "ID_TINH", width: 250, height: 30, placeHolder: "Chọn Tỉnh"});
-
-                var soure_list_huyen = {
-                    datatype: "json",
-                    datafields: [
-                        { name: 'ID_HUYEN' },
-                        { name: 'TEN_HUYEN' }
-                    ],
-                    url: "go?for=loadlisthuyen",
-                    async: true
-                };
-                var dataAdapter_huyen = new $.jqx.dataAdapter(soure_list_huyen);
-                $("#qr_code_quan_huyen").jqxDropDownList({source: dataAdapter_huyen, displayMember: "TEN_HUYEN", valueMember: "ID_HUYEN", placeHolder: "Chọn Quận huyện", width: 250, height: 30});
-
-
-                $("#qr_code_xa_phuong").jqxDropDownList({ source: soure_list_xa, placeHolder: "Chọn Phường xã", width: 250, height: 30});
-                $("#qr_code_linh_vuc").jqxDropDownList({ source: soure_list_linhvuc, placeHolder: "Chọn Lĩnh vực", width: 250, height: 30});
-                $("#qr_code_thu_tuc").jqxDropDownList({ source: soure_list_thutuc, placeHolder: "Chọn Thủ tục", width: 250, height: 30});
             });
             $("#qr_thoat").click(function(){
                 $.post("go", {for:"_logout"}, function(data) {

@@ -2,14 +2,14 @@
   --fluent-black: #000;
   --fluent-white: #fff;
   --fluent-surface: #fff;
-  --fluent-surface-rgb: 255, 255, 255;
+  --fluent-surface-rgb: 241, 241, 241;
   --fluent-surface-color: #000;
   --fluent-background: #fff;
   --fluent-background-color: #000;
   --fluent-type-primary: #201F1E;
   --fluent-type-secondary: #323130;
   --fluent-type-disabled: #323130;
-  --fluent-body-divider: #EDEBE9;
+  --fluent-body-divider: #cecece;
   --fluent-input-background: #fff;
   --fluent-input-disabled-background: #EDEBE9;
   --fluent-input-border: #ced4da; /*#8A8886;*/
@@ -65,7 +65,7 @@
   --fluent-greys-white: #fff;
   --fluent-greys-grey10: #FAF9F8;
   --fluent-greys-grey20: #F3F2F1;
-  --fluent-greys-grey30: #EDEBE9;
+  --fluent-greys-grey30: #29aaff49;
   --fluent-greys-grey40: #E1DFDD;
   --fluent-greys-grey50: #D2D0CE;
   --fluent-greys-grey60: #C8C6C4;
@@ -81,7 +81,7 @@
   --fluent-box-shadow-8: 0px 0.6px 1.8px rgba(0, 0, 0, 0.1), 0px 3.2px 7.2px rgba(0, 0, 0, 0.13);
   --fluent-box-shadow-16: 0px 1.2px 3.6px rgba(0, 0, 0, 0.1), 0px 6.4px 14.4px rgba(0, 0, 0, 0.13);
   --fluent-box-shadow-64: 0px 4.8px 14.4px rgba(0, 0, 0, 0.18), 0px 25.6px 57.6px rgba(0, 0, 0, 0.22);
-  --jqx-primary-rgb: 0, 150, 136;
+  --jqx-primary-rgb: 0, 89, 148;
   --jqx-primary: rgb(var(--jqx-primary-rgb));
   --jqx-primary-color: #fff;
   --jqx-background: #fff;
@@ -107,7 +107,7 @@
   --jqx-scrollbar-button-color-pressed: #333;
   --jqx-scrollbar-button-background-pressed: #f5f5f5;
   --jqx-scrollbar-button-border-pressed: #f5f5f5;
-  --jqx-font-size: 14px;
+  --jqx-font-size: 15px;
 }
 
 body[theme=fluent-dark] {
@@ -472,7 +472,7 @@ body[theme=fluent-dark] {
 
 .jqx-widget-content-fluent {
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--jqx-background-color);
   background-color: var(--jqx-background);
   border-color: var(--jqx-border);
@@ -492,7 +492,7 @@ body[theme=fluent-dark] {
 }
 
 .jqx-grid-column-header-fluent span:not(.jqx-checkbox-check-checked) {
-  font-size: 12px !important;
+  font-size: 15px !important;
   border-color: var(--fluent-greys-grey30);
   font-weight: 600;
 }
@@ -2003,7 +2003,7 @@ jqx-grid-column-filterbutton-fluent,
 
 .jqx-widget-fluent .jqx-grid-column-header-fluent {
   border-color: var(--jqx-border);
-  font-size: 14px;
+  font-size: 15px;
   color: var(--jqx-surface-color);
 }
 
