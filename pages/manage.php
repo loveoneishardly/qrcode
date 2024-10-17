@@ -222,7 +222,8 @@
                     { name: 'ID'},
                     { name: 'ID_DON_VI'},
                     { name: 'TENDONVI'},
-                    { name: 'TEN_LINH_VUC'},
+                    { name: 'LINH_VUC_TEN'},
+                    { name: 'TEN_THU_TUC'},
                     { name: 'TEN_TINH'},
                     { name: 'TEN_HUYEN'},
                     { name: 'TEN_XA'},
@@ -255,12 +256,18 @@
                 autorowheight: false,
                 altrows: true,
                 columns: [
-                    { text: 'ID QR CODE', datafield: 'ID', width: 120, align: 'center', cellsalign: 'center'},
-                    { text: 'Mã Đơn Vị', datafield: 'ID_DON_VI', width: 120, align: 'center', cellsalign: 'center'},
+                    {text: '#', sortable: false, filterable: false, editable: false, groupable: false, draggable: false, resizable: false, datafield: '', columntype: 'number', width: 50, align: 'center', cellsalign: 'center',
+                        cellsrenderer: function (row, column, value) {
+                            return "<div style='margin-top:11px;text-align: center;display: flex;justify-content: center;align-items: center;'>" + (value + 1) + "</div>";
+                        }
+                    },
+                    { text: 'ID QR CODE', datafield: 'ID', width: 120, hidden: true, align: 'center', cellsalign: 'center'},
+                    { text: 'Mã Đơn Vị', datafield: 'ID_DON_VI', hidden: true, width: 120, align: 'center', cellsalign: 'center'},
                     { text: 'Tên Đơn Vị', datafield: 'TENDONVI', width: 400, align: 'center', cellsalign: 'left'},
-                    { text: 'Lĩnh Vực', datafield: 'TEN_LINH_VUC', width: 500, align: 'center', cellsalign: 'center'},
+                    { text: 'Lĩnh Vực', datafield: 'LINH_VUC_TEN', width: 300, align: 'center', cellsalign: 'center'},
+                    { text: 'Thủ Tục', datafield: 'TEN_THU_TUC', width: 500, align: 'center', cellsalign: 'left'},
                     { text: 'Tên Tỉnh/Thành phố', datafield: 'TEN_TINH', width: 230, align: 'center', cellsalign: 'center'},
-                    { text: 'Tên Quận/Huyện/Thị xã', datafield: 'TEN_HUYEN', width: 230, align: 'center', cellsalign: 'center'},
+                    { text: 'Tên Quận/Huyện/Thị xã - Sở ban ngành', datafield: 'TEN_HUYEN', width: 300, align: 'center', cellsalign: 'center'},
                     { text: 'Tên Xã/Phường/Trị trấn', datafield: 'TEN_XA', width: 230, align: 'center', cellsalign: 'center'},
                     { text: 'Người Tạo', datafield: 'TEN_NHAN_VIEN', width: 230, align: 'center', cellsalign: 'center'},
                     { text: 'Trạng Thái', datafield: 'TRANG_THAI', width: 230, align: 'center', cellsalign: 'center'},
@@ -299,8 +306,16 @@
             });
             $("#themmoiqrcode").click(function(){
                 modal_them_thongtin.open();
+                var matinh = $("#qr_tentinh").val();
                 var maloaithutuc = $("#qr_loai_thutuc").val();
+                var mahuyen = $("#qr_tenhuyen").val();
+                var maloaithutuc = $("#qr_loai_thutuc").val();
+                var malinhvuc = $("#qr_linhvuc_hc").val();
                 load_dsTinh();
+                load_dsHuyen(matinh);
+                load_dsXaPhuong(mahuyen);
+                load_list_linhvuc(mahuyen,maloaithutuc);
+                load_list_thutuc(mahuyen,maloaithutuc,malinhvuc);
             });
             $("#qr_tentinh").change(function(){
                 var matinh = $("#qr_tentinh").val();

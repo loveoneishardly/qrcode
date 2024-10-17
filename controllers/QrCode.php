@@ -5,7 +5,7 @@
     class CreateQRCode {
 
         public function CreateQRHanhChinhCong($madonvi,$id){
-            $imgname ="qrcodefarm.png";
+            $imgname ="qrcodehcc.png";
             $loaiurl = "1";
             $url_ma = "";
             $url_madonvi = "";
@@ -50,7 +50,7 @@
             $stmt_update -> execute();
 
             $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-            $host = $_SERVER['HTTP_HOST'];
+            $host = '10.97.13.160';//$_SERVER['HTTP_HOST'];
             $request_uri = $_SERVER['REQUEST_URI'];
             $current_url = $protocol . $host . $request_uri;
             

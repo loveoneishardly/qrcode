@@ -1,6 +1,6 @@
 /*
-SQLyog Community v12.16 (32 bit)
-MySQL - 10.4.21-MariaDB : Database - management_qrcode
+SQLyog Community
+MySQL - 10.1.37-MariaDB : Database - management_qrcode
 *********************************************************************
 */
 
@@ -27,7 +27,7 @@ CREATE TABLE `dm_donvi` (
   `SODIENTHOAI` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `EMAIL` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `GHICHU` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `TRANGTHAI` int(11) DEFAULT 1,
+  `TRANGTHAI` int(11) DEFAULT '1',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -42,10 +42,10 @@ DROP TABLE IF EXISTS `dm_duong_dan`;
 
 CREATE TABLE `dm_duong_dan` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `DUONG_DAN` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `DUONG_DAN` text COLLATE utf8mb4_unicode_ci,
   `LOAI` int(11) DEFAULT NULL COMMENT '1: nộp hồ sơ, ...',
   `TRANG_THAI` int(2) DEFAULT NULL,
-  `TIME_CREATE` datetime DEFAULT current_timestamp(),
+  `TIME_CREATE` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -65,8 +65,8 @@ CREATE TABLE `dm_huyen` (
   `QH_CODE` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `QH_GUID` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `SO_BAN_NGANH` int(1) DEFAULT NULL,
-  `TRANG_THAI` int(2) DEFAULT 1,
-  `TIME_CREATE` datetime DEFAULT current_timestamp(),
+  `TRANG_THAI` int(2) DEFAULT '1',
+  `TIME_CREATE` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID_HUYEN`),
   KEY `ID_TINH` (`ID_TINH`),
   CONSTRAINT `dm_huyen_ibfk_1` FOREIGN KEY (`ID_TINH`) REFERENCES `dm_tinh` (`ID_TINH`)
@@ -117,14 +117,14 @@ CREATE TABLE `dm_linhvuc` (
   `ITEM_ID` int(11) DEFAULT NULL,
   `ITEM_GUID` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ITEM_MA` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `TEN_LINH_VUC` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `TEN_LINH_VUC` text COLLATE utf8mb4_unicode_ci,
   `LOAI_ITEM_LTTID` int(2) DEFAULT NULL COMMENT '1: Cá nhân, 2: Tổ chức',
   `LINH_VUC_ID` int(11) DEFAULT NULL,
   `LINH_VUC_GUID` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `LINH_VUC_MA` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `LINH_VUC_TEN` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `TRANG_THAI` int(2) DEFAULT 1,
-  `TIME_CREATE` datetime DEFAULT current_timestamp(),
+  `TRANG_THAI` int(2) DEFAULT '1',
+  `TIME_CREATE` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID_LINH_VUC`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4592 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -2079,8 +2079,7 @@ insert  into `dm_linhvuc`(`ID_LINH_VUC`,`ORANIZATION`,`ITEM_ID`,`ITEM_GUID`,`ITE
 (1946,'13750b12-f12c-41f7-bf47-5738a36e223d',13892,'c4cf1e23-0eb2-4a64-a785-c6d09a1759e9','1.012808.000.00.00.H51','Xác nhận tiếp tục sử dụng đất nông nghiệp của cá nhân khi hết hạn sử dụng đất',1,1326,'5bac33a6-1719-4c58-bbcb-e237bb121e21','G13-TN02','Đất đai',1,'2024-10-17 00:30:09'),
 (1947,'13750b12-f12c-41f7-bf47-5738a36e223d',13825,'d56ad4e2-5c12-4a3a-a5ca-4ba27a5ef97d','1.012601.000.00.00.H51','THỦ TỤC THÔNG BÁO DANH MỤC HOẠT ĐỘNG TÔN GIÁO BỔ SUNG ĐỐI VỚI TỔ CHỨC CÓ ĐỊA BÀN HOẠT ĐỘNG TÔN GIÁO Ở NHIỀU XÃ THUỘC MỘT HUYỆN (CẤP HUYỆN)',0,1561,'98e7c174-7ae4-4321-9931-85b5f1ba8107','__G09-NV13','Tín ngưỡng, tôn giáo',1,'2024-10-17 00:30:09'),
 (1948,'13750b12-f12c-41f7-bf47-5738a36e223d',13905,'d7c7463e-280f-4720-84a5-562c71c96051','1.012806.000.00.00.H51','Giao đất, cho thuê đất, giao khu vực biển để thực hiện hoạt động lấn biển mà người xin giao đất, thuê đất là cá nhân',1,1326,'5bac33a6-1719-4c58-bbcb-e237bb121e21','G13-TN02','Đất đai',1,'2024-10-17 00:30:09'),
-(1949,'13750b12-f12c-41f7-bf47-5738a36e223d',13878,'e56d11c2-c956-4e37-94fb-822ef0df5fcd','1.012569.000.00.00.H51','Thu hồi tài sản kết cấu hạ tầng chợ',2,1559,'b2d36d09-cf05-498e-b18a-4760fe2ec6b4','G02-CT41','Tài sản kết cấu hạ tầng chợ do Nhà nước đầu tư, quản lý',1,'2024-10-17 00:30:09');
-insert  into `dm_linhvuc`(`ID_LINH_VUC`,`ORANIZATION`,`ITEM_ID`,`ITEM_GUID`,`ITEM_MA`,`TEN_LINH_VUC`,`LOAI_ITEM_LTTID`,`LINH_VUC_ID`,`LINH_VUC_GUID`,`LINH_VUC_MA`,`LINH_VUC_TEN`,`TRANG_THAI`,`TIME_CREATE`) values 
+(1949,'13750b12-f12c-41f7-bf47-5738a36e223d',13878,'e56d11c2-c956-4e37-94fb-822ef0df5fcd','1.012569.000.00.00.H51','Thu hồi tài sản kết cấu hạ tầng chợ',2,1559,'b2d36d09-cf05-498e-b18a-4760fe2ec6b4','G02-CT41','Tài sản kết cấu hạ tầng chợ do Nhà nước đầu tư, quản lý',1,'2024-10-17 00:30:09'),
 (1950,'13750b12-f12c-41f7-bf47-5738a36e223d',13861,'e5ffcd3e-15c6-4b26-87e5-10c38b45b34b','1.012596.000.00.00.H51','THỦ TỤC ĐỀ NGHỊ GIẢNG ĐẠO NGOÀI ĐỊA BÀN PHỤ TRÁCH, CƠ SỞ TÔN GIÁO, ĐỊA ĐIỂM HỢP PHÁP ĐÃ ĐĂNG KÝ CÓ QUY MÔ TỔ CHỨC Ở MỘT HUYỆN (CẤP  HUYỆN)',0,1561,'98e7c174-7ae4-4321-9931-85b5f1ba8107','__G09-NV13','Tín ngưỡng, tôn giáo',1,'2024-10-17 00:30:09'),
 (1951,'13750b12-f12c-41f7-bf47-5738a36e223d',13879,'e8fa5141-1441-499d-9853-9fa4be7f667b','1.012568.000.00.00.H51','Giao tài sản kết cấu hạ tầng chợ do cấp huyện quản lý',2,1559,'b2d36d09-cf05-498e-b18a-4760fe2ec6b4','G02-CT41','Tài sản kết cấu hạ tầng chợ do Nhà nước đầu tư, quản lý',1,'2024-10-17 00:30:09'),
 (1952,'13750b12-f12c-41f7-bf47-5738a36e223d',13888,'f0993810-29ed-4e26-876d-eff67fcbf004','1.012774.000.00.00.H51','Cho phép chuyển mục đích sử dụng đất đối với trường hợp thuộc diện chấp thuận chủ trương đầu tư, chấp thuận nhà đầu tư theo quy định của pháp luật về đầu tư mà người xin chuyển mục đích sử dụng đất là cá nhân',1,1326,'5bac33a6-1719-4c58-bbcb-e237bb121e21','G13-TN02','Đất đai',1,'2024-10-17 00:30:09'),
@@ -3981,8 +3980,7 @@ insert  into `dm_linhvuc`(`ID_LINH_VUC`,`ORANIZATION`,`ITEM_ID`,`ITEM_GUID`,`ITE
 (3847,'fa544881-00f3-4f00-8937-1e5ecf82eb1c',13316,'5008fd39-f3f1-4bcc-88fd-99cf8fb5c54d','2.001661.000.00.00.H51','Hỗ trợ học văn hóa, học nghề, trợ cấp khó khăn ban đầu cho nạn nhân',1,1335,'412d4a66-3662-4e5d-802e-3cde35f21593','G07-LĐ10','Phòng, chống tệ nạn xã hội',1,'2024-10-17 00:30:11'),
 (3848,'fa544881-00f3-4f00-8937-1e5ecf82eb1c',13356,'04d70ba0-ec82-4bd1-845f-9ec9ac8e8997','1.008603.000.00.00.H51','Kê khai, thẩm định tờ khai phí bảo vệ môi trường đối với nước thải',0,1454,'e5793f8e-727d-43c0-9f6b-e82a7597203b','G12-TC01','Chính sách Thuế',1,'2024-10-17 00:30:11'),
 (3849,'fa544881-00f3-4f00-8937-1e5ecf82eb1c',13353,'b1e2c2a4-c6c2-417c-ac9c-f6378084d613','1.009794.000.00.00.H51','Kiểm tra công tác nghiệm thu hoàn thành công trình của cơ quan chuyên môn về xây dựng tại địa phương',0,1380,'518cd160-13fe-4cfe-8f7d-b9413323b8ca','G17-XD01','Quản lý chất lượng công trình xây dựng',1,'2024-10-17 00:30:11'),
-(3850,'fa544881-00f3-4f00-8937-1e5ecf82eb1c',11759,'162439b7-b2a7-4bda-bc60-5fc7f968caa0','1.001645.000.00.00.H51','Lấy ý kiến đại diện cộng đồng dân cư và tổ chức, cá nhân (đối với trường hợp cơ quan tổ chức lấy ý kiến là Ủy ban nhân dân cấp huyện)',0,1315,'29f1b2c9-e94d-4c5e-8df6-92231608046c','G13-TN10','Tài nguyên nước',1,'2024-10-17 00:30:11');
-insert  into `dm_linhvuc`(`ID_LINH_VUC`,`ORANIZATION`,`ITEM_ID`,`ITEM_GUID`,`ITEM_MA`,`TEN_LINH_VUC`,`LOAI_ITEM_LTTID`,`LINH_VUC_ID`,`LINH_VUC_GUID`,`LINH_VUC_MA`,`LINH_VUC_TEN`,`TRANG_THAI`,`TIME_CREATE`) values 
+(3850,'fa544881-00f3-4f00-8937-1e5ecf82eb1c',11759,'162439b7-b2a7-4bda-bc60-5fc7f968caa0','1.001645.000.00.00.H51','Lấy ý kiến đại diện cộng đồng dân cư và tổ chức, cá nhân (đối với trường hợp cơ quan tổ chức lấy ý kiến là Ủy ban nhân dân cấp huyện)',0,1315,'29f1b2c9-e94d-4c5e-8df6-92231608046c','G13-TN10','Tài nguyên nước',1,'2024-10-17 00:30:11'),
 (3851,'fa544881-00f3-4f00-8937-1e5ecf82eb1c',11770,'0f399a97-4692-4567-8656-5269faa255b6','1.010592.000.00.00.H51','Miễn nhiệm, cách chức chủ tịch, thư ký, thành viên hội đồng trường trung cấp công lập.',2,1340,'ec13bad3-b6e1-4ed2-8aa4-e2e5492cbf19','G07-LĐ06','Giáo dục nghề nghiệp',1,'2024-10-17 00:30:11'),
 (3852,'fa544881-00f3-4f00-8937-1e5ecf82eb1c',11772,'37b80a4e-3641-4bf6-ba09-5702605ef851','1.005435.000.00.00.H51','Mua hóa đơn lẻ',2,1345,'4d6150bb-e082-4272-9bc0-7e4514dcef91','G12-TC09','Quản lý công sản',1,'2024-10-17 00:30:11'),
 (3853,'fa544881-00f3-4f00-8937-1e5ecf82eb1c',11773,'0a7a9ac8-6a08-4990-a186-c942614a884d','1.005434.000.00.00.H51','Mua quyển hóa đơn',2,1345,'4d6150bb-e082-4272-9bc0-7e4514dcef91','G12-TC09','Quản lý công sản',1,'2024-10-17 00:30:11'),
@@ -4743,13 +4741,13 @@ CREATE TABLE `dm_nhanvien` (
   `SO_DIEN_THOAI` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '1: có, 0: không',
   `TAI_KHOAN` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `PASSWORD` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `AVATAR` longblob DEFAULT NULL,
+  `AVATAR` longblob,
   `GHI_CHU` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ADMIN` int(2) DEFAULT 0,
-  `MENU` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ADMIN` int(2) DEFAULT '0',
+  `MENU` longtext COLLATE utf8mb4_unicode_ci,
   `TIME_CREATE` datetime DEFAULT NULL,
   `TIME_LOCK` datetime DEFAULT NULL,
-  `TRANGTHAI` int(11) DEFAULT 1,
+  `TRANGTHAI` int(11) DEFAULT '1',
   PRIMARY KEY (`MA_NHAN_VIEN`,`TAI_KHOAN`),
   KEY `MA_DON_VI` (`MA_DON_VI`),
   KEY `MA_PHONG_BAN` (`MA_PHONG_BAN`),
@@ -4769,7 +4767,7 @@ CREATE TABLE `dm_tinh` (
   `ID_TINH` int(11) NOT NULL,
   `TEN_TINH` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `TRANG_THAI` int(2) DEFAULT NULL,
-  `TIME_CREATE` datetime DEFAULT current_timestamp(),
+  `TIME_CREATE` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID_TINH`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -4785,11 +4783,12 @@ DROP TABLE IF EXISTS `dm_xa_phuong_tt`;
 CREATE TABLE `dm_xa_phuong_tt` (
   `ID_XA` int(11) NOT NULL,
   `ID_HUYEN` int(11) DEFAULT NULL,
+  `QH_GUID` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `TEN_XA` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `XP_CODE` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `XP_GUID` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `TRANG_THAI` int(2) DEFAULT 1,
-  `TIME_CREATE` datetime DEFAULT current_timestamp(),
+  `TRANG_THAI` int(2) DEFAULT '1',
+  `TIME_CREATE` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID_XA`),
   KEY `ID_HUYEN` (`ID_HUYEN`),
   CONSTRAINT `dm_xa_phuong_tt_ibfk_1` FOREIGN KEY (`ID_HUYEN`) REFERENCES `dm_huyen` (`ID_HUYEN`)
@@ -4797,116 +4796,116 @@ CREATE TABLE `dm_xa_phuong_tt` (
 
 /*Data for the table `dm_xa_phuong_tt` */
 
-insert  into `dm_xa_phuong_tt`(`ID_XA`,`ID_HUYEN`,`TEN_XA`,`XP_CODE`,`XP_GUID`,`TRANG_THAI`,`TIME_CREATE`) values 
-(6447,6428,'Phường 1','000.16.19.H51','890a85b4-580a-4700-9aff-f3d136222387',1,'2024-10-15 21:10:46'),
-(6456,6428,'Phường 2','000.17.19.H51','1643d54f-3085-47a5-a6a8-b0bd0536ef57',1,'2024-10-15 21:10:46'),
-(6465,6428,'Phường 3','000.18.19.H51','98677f1b-9cca-42d4-837a-92171500a238',1,'2024-10-15 21:10:46'),
-(6474,6428,'Phường 4','000.19.19.H51','cdf564f7-d400-4e93-a56a-9bfa155b241a',1,'2024-10-15 21:10:46'),
-(6483,6428,'Phường 5','000.20.19.H51','6f0f20d1-3604-4007-bfd3-a7fdd3b7630a',1,'2024-10-15 21:10:46'),
-(6492,6428,'Phường 6','000.21.19.H51','eacf69fe-3f96-4d92-9f88-208766dc2799',1,'2024-10-15 21:10:46'),
-(6501,6428,'Phường 7','000.22.19.H51','8a258c59-4d5e-4fb9-8882-7b7032f0bebc',1,'2024-10-15 21:10:46'),
-(6510,6428,'Phường 8','000.23.19.H51','ab1e109d-52f1-49cc-b1ed-ab5c4656fa66',1,'2024-10-15 21:10:46'),
-(6519,6428,'Phường 9','000.24.19.H51','6cee56ca-8df9-433f-8049-359005f47d8f',1,'2024-10-15 21:10:46'),
-(6528,6428,'Phường 10','000.25.19.H51','938dbfa2-a6fa-4f72-a398-4a28a3d4301e',1,'2024-10-15 21:10:46'),
-(6556,6537,'Phường 1 - Thị xã Ngã Năm','000.19.20.H51','f5a524b4-78df-4766-8802-ec7956ca9365',1,'2024-10-15 21:10:46'),
-(6565,6537,'Phường 2 - Thị xã Ngã Năm','000.20.20.H51','39d6a95b-3962-402b-a2b9-3ea4407fb7a8',1,'2024-10-15 21:10:46'),
-(6574,6537,'Xã Long Bình','000.22.20.H51','0ff708e0-e2c8-415b-a7eb-c2f6436ee29c',1,'2024-10-15 21:10:46'),
-(6583,6537,'Xã Mỹ Bình','000.23.20.H51','120f07e1-baf5-402a-b6ab-1339b93a8e33',1,'2024-10-15 21:10:46'),
-(6592,6537,'Xã Mỹ Quới','000.26.20.H51','efaf3ad4-974b-4590-a2fd-1b81b12c2c2d',1,'2024-10-15 21:10:46'),
-(6601,6537,'Xã Tân Long','000.24.20.H51','48c7804a-c5a9-488a-8093-63d299f2351e',1,'2024-10-15 21:10:46'),
-(6610,6537,'Phường 3 - Thị xã Ngã Năm','000.21.20.H51','57ca9f32-2193-44a9-a348-0be19a8b6b93',1,'2024-10-15 21:10:46'),
-(6619,6537,'Xã Vĩnh Quới','000.25.20.H51','fb76e385-7c7a-46ce-a25a-bd87582b1e39',1,'2024-10-15 21:10:46'),
-(6647,6628,'Phường 1 - Thị xã Vĩnh Châu','000.18.22.H51','4d97598d-238d-4596-8a4d-11acc8e25b4d',1,'2024-10-15 21:10:46'),
-(6656,6628,'Phường 2 - Thị xã Vĩnh Châu','000.19.22.H51','8cb97894-ed04-4f6b-ad8d-93741e103f72',1,'2024-10-15 21:10:46'),
-(6665,6628,'Phường Khánh Hòa','000.20.22.H51','5c95bf47-ae6f-4ff8-97f9-c7dc40d209cb',1,'2024-10-15 21:10:46'),
-(6674,6628,'Phường Vĩnh Phước','000.21.22.H51','54d9ddbd-3966-47fb-a770-5adac580f70d',1,'2024-10-15 21:10:46'),
-(6683,6628,'Xã Hòa Đông','000.27.22.H51','ec68b2b0-9a97-4823-9c05-94a044b3538d',1,'2024-10-15 21:10:46'),
-(6692,6628,'Xã Lạc Hòa','000.25.22.H51','2768200a-2975-470c-834d-e213a2289090',1,'2024-10-15 21:10:46'),
-(6701,6628,'Xã Lai Hòa','000.23.22.H51','793b4aa6-9835-4c41-a85b-e2a2f8520abf',1,'2024-10-15 21:10:46'),
-(6710,6628,'Xã Vĩnh Hải','000.24.22.H51','33e1b61a-311f-400b-b9dc-f79a3f738435',1,'2024-10-15 21:10:46'),
-(6719,6628,'Xã Vĩnh Hiệp','000.26.22.H51','7b76b009-9f13-4145-b8d6-d4f81cb40731',1,'2024-10-15 21:10:46'),
-(6728,6628,'Xã Vĩnh Tân','000.22.22.H51','ff835cee-170d-44ad-93c9-f939eee6f590',1,'2024-10-15 21:10:46'),
-(6756,6737,'Thị trấn Châu Thành','000.17.25.H51','084f6979-a1c3-427b-a9e3-86ce1265e3a9',1,'2024-10-15 21:10:46'),
-(6768,6737,'Xã Hồ Đắc Kiện','000.22.25.H51','3e485511-e4ba-4399-a034-e135ca107514',1,'2024-10-15 21:10:46'),
-(6777,6737,'Xã Phú Tâm','000.21.25.H51','f0cbb3d5-b4b8-4b47-b101-6bd2cb1c6f3a',1,'2024-10-15 21:10:46'),
-(6786,6737,'Xã Thuận Hòa','000.23.25.H51','23133a9f-96c0-43ce-9a1f-95bf0e2e5d67',1,'2024-10-15 21:10:46'),
-(6796,6737,'Xã Phú Tân','000.20.25.H51','c937b8b9-7af7-4df2-b1b0-db13b81cc4f7',1,'2024-10-15 21:10:46'),
-(6805,6737,'Xã Thiện Mỹ','000.24.25.H51','aaaf57ab-a434-48d1-9171-cba9e397974a',1,'2024-10-15 21:10:46'),
-(6814,6737,'Xã An Hiệp','000.19.25.H51','86050ff1-d3b4-478c-8b83-925211ca368a',1,'2024-10-15 21:10:46'),
-(6823,6737,'Xã An Ninh','000.18.25.H51','f5a60ee9-6149-4dbb-8d87-fdd8758e531d',1,'2024-10-15 21:10:46'),
-(6851,6832,'Thị Trấn Kế Sách','000.18.29.H51','11f00852-7fba-48f5-93aa-6927ef464f9c',1,'2024-10-15 21:10:46'),
-(6861,6832,'Thị trấn An Lạc Thôn','000.19.29.H51','144d8cdf-cc6b-4bfb-a59e-fce186d04447',1,'2024-10-15 21:10:46'),
-(6870,6832,'Xã An Lạc Tây','000.27.29.H51','28dc8e08-ce0f-414d-a603-55d488e1ad4c',1,'2024-10-15 21:10:46'),
-(6879,6832,'Xã An Mỹ','000.20.29.H51','98510b86-56c3-4c8d-a6e9-b175e92d4792',1,'2024-10-15 21:10:46'),
-(6888,6832,'Xã Ba Trinh','000.26.29.H51','562b0768-8090-43da-888a-c92167d8aa75',1,'2024-10-15 21:10:46'),
-(6897,6832,'Xã Đại Hải','000.29.29.H51','dcb5a9a1-c06a-425d-8a1e-07888f7177fd',1,'2024-10-15 21:10:46'),
-(6906,6832,'Xã Kế An','000.25.29.H51','22ba14cc-dd02-4d3e-9a22-2ae8df10615f',1,'2024-10-15 21:10:46'),
-(6915,6832,'Xã Kế Thành','000.24.29.H51','698ab6d0-61ef-40bf-9b12-32f2cf1bacaa',1,'2024-10-15 21:10:46'),
-(6924,6832,'Xã Nhơn Mỹ','000.28.29.H51','c05b15ed-edfa-41f6-98e4-88155ae28d56',1,'2024-10-15 21:10:46'),
-(6933,6832,'Xã Phong Nẫm','000.23.29.H51','2e268616-a524-433e-8328-ab8d276a0b20',1,'2024-10-15 21:10:46'),
-(6942,6832,'Xã Thới An Hội','000.21.29.H51','aa3176c4-f91d-4c9f-95d0-d10b78e97ab7',1,'2024-10-15 21:10:46'),
-(6951,6832,'Xã Trinh Phú','000.22.29.H51','8eb1c685-73c8-43d9-9052-741bf6a8b502',1,'2024-10-15 21:10:46'),
-(6960,6832,'Xã Xuân Hòa','000.30.29.H51','a96d8dd0-74f9-43f4-aa2d-d18db58367e0',1,'2024-10-15 21:10:46'),
-(6988,6969,'Thị Trấn Long Phú ','000.19.24.H51','1b3068b9-10eb-4f3a-ad8e-8d9af62b3c9d',1,'2024-10-15 21:10:46'),
-(6999,6969,'Thị trấn Đại Ngãi','000.20.24.H51','d73c85e4-fc12-4b6c-8354-b953f5351190',1,'2024-10-15 21:10:46'),
-(7009,6969,'Xã Châu Khánh','000.26.24.H51','ce7142a8-8221-483c-b085-bdd925679f63',1,'2024-10-15 21:10:46'),
-(7019,6969,'Xã Hậu Thạnh','000.24.24.H51','4594b94a-2a9e-413a-86cb-82d836b98345',1,'2024-10-15 21:10:46'),
-(7028,6969,'Xã Long Đức','000.21.24.H51','62649c8c-ed8c-46ff-8d2a-c2cc5bc623d2',1,'2024-10-15 21:10:46'),
-(7037,6969,'Xã Long Phú','000.25.24.H51','c1fd04b7-bd39-48d3-bc9b-32582519f69d',1,'2024-10-15 21:10:46'),
-(7047,6969,'Xã Phú Hữu','000.22.24.H51','db817345-841b-46f1-bae3-e40238bdd4c6',1,'2024-10-15 21:10:46'),
-(7057,6969,'Xã Song Phụng','000.23.24.H51','99474943-1195-458f-b9a0-169ae4b0705a',1,'2024-10-15 21:10:46'),
-(7068,6969,'Xã Tân Hưng','000.28.24.H51','4217a242-5b6f-4d86-86ac-501d7bb38072',1,'2024-10-15 21:10:46'),
-(7078,6969,'Xã Tân Thạnh','000.27.24.H51','0c80ed51-304a-406f-98c5-21c7e5b701b1',1,'2024-10-15 21:10:46'),
-(7088,6969,'Xã Trường Khánh','000.29.24.H51','1216f39f-7c21-4ea6-adcf-d80bb6dd19a8',1,'2024-10-15 21:10:46'),
-(7117,7097,'Thị trấn Huỳnh Hữu Nghĩa','000.18.26.H51','70b7e128-d6cf-47f1-8c42-dfe04303e7bb',1,'2024-10-15 21:10:46'),
-(7128,7097,'Xã Hưng Phú','000.21.26.H51','93e21619-f431-4fa6-8641-9e02c2aef924',1,'2024-10-15 21:10:46'),
-(7137,7097,'Xã Long Hưng','000.22.26.H51','cbf1f318-11fd-4218-8e9f-b07df45775ba',1,'2024-10-15 21:10:46'),
-(7147,7097,'Xã Mỹ Hương','000.20.26.H51','db2a95bf-a54e-4071-9aa2-a0b6f9d9eaed',1,'2024-10-15 21:10:46'),
-(7156,7097,'Xã Mỹ Phước','000.23.26.H51','3b8f8714-5b8f-4489-8bf2-241b83709270',1,'2024-10-15 21:10:46'),
-(7165,7097,'Xã Mỹ Tú','000.19.26.H51','4353964c-0327-44c1-adce-f691bebbfe9a',1,'2024-10-15 21:10:46'),
-(7174,7097,'Xã Mỹ Thuận','000.24.26.H51','a15894ce-01e1-41b4-822b-cc68622ac9ab',1,'2024-10-15 21:10:46'),
-(7183,7097,'Xã Phú Mỹ','000.25.26.H51','e359ebd6-f838-4279-93be-8478fd7694c2',1,'2024-10-15 21:10:46'),
-(7192,7097,'Xã Thuận Hưng','000.26.26.H51','88e5d631-df9f-4281-8f17-f7be116d1706',1,'2024-10-15 21:10:46'),
-(7220,7201,'Thị Trấn Mỹ Xuyên','000.18.28.H51','686d56f6-6b84-4c89-9de9-886cab2ab38d',1,'2024-10-15 21:10:46'),
-(7229,7201,'Xã Đại Tâm','000.21.28.H51','78e6d96d-da07-4a1d-8ead-1dde26979386',1,'2024-10-15 21:10:46'),
-(7238,7201,'Xã Gia Hòa 1','000.19.28.H51','be954deb-1a99-415e-8c6b-8993e0eb1af3',1,'2024-10-15 21:10:46'),
-(7247,7201,'Xã Gia Hòa 2','000.20.28.H51','36d1e769-29dc-4d0f-990a-80921ddd4cfc',1,'2024-10-15 21:10:46'),
-(7256,7201,'Xã Hòa Tú 1','000.27.28.H51','53f7b7e1-d5fd-4207-90f5-4a494f1178bc',1,'2024-10-15 21:10:46'),
-(7265,7201,'Xã Hòa Tú 2','000.28.28.H51','8533b951-107b-4805-b8d6-9b5e8f723844',1,'2024-10-15 21:10:46'),
-(7274,7201,'Xã Ngọc Đông','000.24.28.H51','8f5b1f22-c2c0-471e-be96-334c260b6c9a',1,'2024-10-15 21:10:46'),
-(7283,7201,'Xã Ngọc Tố','000.23.28.H51','666ef0c9-1da1-42c9-8071-880fa32e5f3f',1,'2024-10-15 21:10:46'),
-(7292,7201,'Xã Tham Đôn','000.22.28.H51','d85f729a-0527-44fa-8ccc-1f2ffacae352',1,'2024-10-15 21:10:46'),
-(7301,7201,'Xã Thạnh Phú','000.26.28.H51','260d6ae7-c31c-4f2c-8dfa-cb151d43ab3b',1,'2024-10-15 21:10:46'),
-(7310,7201,'Xã Thạnh Quới','000.25.28.H51','6f9a44f5-1100-44bc-9437-4bbb6091ccdc',1,'2024-10-15 21:10:46'),
-(7338,7319,'Thị trấn Phú Lộc','000.19.27.H51','2e700642-62d2-4269-89eb-bf03b0093b9e',1,'2024-10-15 21:10:46'),
-(7347,7319,'Thị trấn Hưng Lợi','000.20.27.H51','cdb6beec-3c1c-4555-a4cd-0a155dbd4c9c',1,'2024-10-15 21:10:46'),
-(7356,7319,'Xã Châu Hưng','000.21.27.H51','eab7e968-b40f-4657-86cb-bd41a43557f2',1,'2024-10-15 21:10:46'),
-(7365,7319,'Xã Lâm Kiết','000.28.27.H51','5d6b5a01-aacd-4805-af30-b1ab64fd8cab',1,'2024-10-15 21:10:46'),
-(7374,7319,'Xã Lâm Tân','000.27.27.H51','10f49a73-9971-45a4-b43b-9a45d9e43120',1,'2024-10-15 21:10:46'),
-(7383,7319,'Xã Tuân Tức','000.26.27.H51','36f6b338-dad7-4d5d-9b7c-6b579f8c7768',1,'2024-10-15 21:10:46'),
-(7392,7319,'Xã Thạnh Tân','000.25.27.H51','e4db6dc2-545b-4448-bcd1-763d466352a9',1,'2024-10-15 21:10:46'),
-(7401,7319,'Xã Thạnh Trị','000.24.27.H51','c58309d9-a0ff-43cc-acfb-2aeb53a88bdf',1,'2024-10-15 21:10:46'),
-(7410,7319,'Xã Vĩnh Lợi','000.22.27.H51','27efe8bc-b5f2-4661-9c76-90be71e6fb89',1,'2024-10-15 21:10:46'),
-(7419,7319,'Xã Vĩnh Thành','000.23.27.H51','eb70a276-8404-49be-bb0f-ea26ccc91be3',1,'2024-10-15 21:10:46'),
-(7448,7428,'Thị Trấn Lịch Hội Thượng','000.17.21.H51','40bbe26e-a71a-49b6-93ce-68c51a43418a',1,'2024-10-15 21:10:46'),
-(7457,7428,'Thị trấn Trần Đề','000.18.21.H51','6eef79b1-4eab-4573-8324-0f5c69d4a54a',1,'2024-10-15 21:10:46'),
-(7466,7428,'Xã Đại Ân  2','000.27.21.H51','d56e8889-ddd7-4b3f-ac2a-00f17d25ea4f',1,'2024-10-15 21:10:46'),
-(7475,7428,'Xã Lịch Hội Thượng','000.25.21.H51','0e041842-6c29-43e2-bcd9-feaf12757976',1,'2024-10-15 21:10:46'),
-(7484,7428,'Xã Liêu Tú','000.24.21.H51','a73e499c-da25-4a72-a6f7-e82e3e57b060',1,'2024-10-15 21:10:46'),
-(7493,7428,'Xã Tài Văn','000.20.21.H51','eab02730-91f3-4458-92b1-a3ef408cc92c',1,'2024-10-15 21:10:46'),
-(7502,7428,'Xã Thạnh Thới An','000.26.21.H51','6d667382-0f79-4f50-abc4-d7fb950dfcf0',1,'2024-10-15 21:10:46'),
-(7511,7428,'Xã Thạnh Thới Thuận','000.19.21.H51','ccc49ee7-5e54-41a6-8b5f-70b54a458146',1,'2024-10-15 21:10:46'),
-(7520,7428,'Xã Trung Bình','000.23.21.H51','4634a493-c13f-4206-9d92-6afb396e89b1',1,'2024-10-15 21:10:46'),
-(7529,7428,'Xã Viên An','000.21.21.H51','32cc5d26-6f36-49d8-aea0-936838d12fa0',1,'2024-10-15 21:10:46'),
-(7538,7428,'Xã Viên Bình','000.22.21.H51','61bee174-a275-4a45-bbac-d4f0a3ed43f0',1,'2024-10-15 21:10:46'),
-(7566,7547,'Thị trấn Cù Lao Dung','000.18.23.H51','c013ddb3-3018-4f9c-9c53-6b7815621963',1,'2024-10-15 21:10:46'),
-(7575,7547,'Xã An Thạnh 1','000.25.23.H51','32acbffd-796a-4266-8dee-f0a4019389fc',1,'2024-10-15 21:10:46'),
-(7584,7547,'Xã An Thạnh 2','000.19.23.H51','f2d86c8f-e778-409e-96e5-078d3cc83cb7',1,'2024-10-15 21:10:46'),
-(7593,7547,'Xã An Thạnh 3','000.20.23.H51','cd41cff4-518f-465e-a8e3-b2e9df4795c9',1,'2024-10-15 21:10:46'),
-(7603,7547,'Xã An Thạnh Đông','000.21.23.H51','132f146b-c6ea-429e-904d-9b5b688318c6',1,'2024-10-15 21:10:46'),
-(7612,7547,'Xã An Thạnh Nam','000.22.23.H51','10663e4f-85d2-480e-aa8f-4680b9afebbe',1,'2024-10-15 21:10:46'),
-(7621,7547,'Xã An Thạnh Tây','000.23.23.H51','f8b2176b-b6f3-44a2-a89b-4449a3b12b73',1,'2024-10-15 21:10:46'),
-(7631,7547,'Xã Đại Ân 1','000.24.23.H51','73f397df-be83-454c-a77b-808b21ffc499',1,'2024-10-15 21:10:46');
+insert  into `dm_xa_phuong_tt`(`ID_XA`,`ID_HUYEN`,`QH_GUID`,`TEN_XA`,`XP_CODE`,`XP_GUID`,`TRANG_THAI`,`TIME_CREATE`) values 
+(6447,6428,'34e268ea-1d48-41ea-8c2c-8a9f6f292805','Phường 1','000.16.19.H51','890a85b4-580a-4700-9aff-f3d136222387',1,'2024-10-15 21:10:46'),
+(6456,6428,'34e268ea-1d48-41ea-8c2c-8a9f6f292805','Phường 2','000.17.19.H51','1643d54f-3085-47a5-a6a8-b0bd0536ef57',1,'2024-10-15 21:10:46'),
+(6465,6428,'34e268ea-1d48-41ea-8c2c-8a9f6f292805','Phường 3','000.18.19.H51','98677f1b-9cca-42d4-837a-92171500a238',1,'2024-10-15 21:10:46'),
+(6474,6428,'34e268ea-1d48-41ea-8c2c-8a9f6f292805','Phường 4','000.19.19.H51','cdf564f7-d400-4e93-a56a-9bfa155b241a',1,'2024-10-15 21:10:46'),
+(6483,6428,'34e268ea-1d48-41ea-8c2c-8a9f6f292805','Phường 5','000.20.19.H51','6f0f20d1-3604-4007-bfd3-a7fdd3b7630a',1,'2024-10-15 21:10:46'),
+(6492,6428,'34e268ea-1d48-41ea-8c2c-8a9f6f292805','Phường 6','000.21.19.H51','eacf69fe-3f96-4d92-9f88-208766dc2799',1,'2024-10-15 21:10:46'),
+(6501,6428,'34e268ea-1d48-41ea-8c2c-8a9f6f292805','Phường 7','000.22.19.H51','8a258c59-4d5e-4fb9-8882-7b7032f0bebc',1,'2024-10-15 21:10:46'),
+(6510,6428,'34e268ea-1d48-41ea-8c2c-8a9f6f292805','Phường 8','000.23.19.H51','ab1e109d-52f1-49cc-b1ed-ab5c4656fa66',1,'2024-10-15 21:10:46'),
+(6519,6428,'34e268ea-1d48-41ea-8c2c-8a9f6f292805','Phường 9','000.24.19.H51','6cee56ca-8df9-433f-8049-359005f47d8f',1,'2024-10-15 21:10:46'),
+(6528,6428,'34e268ea-1d48-41ea-8c2c-8a9f6f292805','Phường 10','000.25.19.H51','938dbfa2-a6fa-4f72-a398-4a28a3d4301e',1,'2024-10-15 21:10:46'),
+(6556,6537,'13750b12-f12c-41f7-bf47-5738a36e223d','Phường 1 - Thị xã Ngã Năm','000.19.20.H51','f5a524b4-78df-4766-8802-ec7956ca9365',1,'2024-10-15 21:10:46'),
+(6565,6537,'13750b12-f12c-41f7-bf47-5738a36e223d','Phường 2 - Thị xã Ngã Năm','000.20.20.H51','39d6a95b-3962-402b-a2b9-3ea4407fb7a8',1,'2024-10-15 21:10:46'),
+(6574,6537,'13750b12-f12c-41f7-bf47-5738a36e223d','Xã Long Bình','000.22.20.H51','0ff708e0-e2c8-415b-a7eb-c2f6436ee29c',1,'2024-10-15 21:10:46'),
+(6583,6537,'13750b12-f12c-41f7-bf47-5738a36e223d','Xã Mỹ Bình','000.23.20.H51','120f07e1-baf5-402a-b6ab-1339b93a8e33',1,'2024-10-15 21:10:46'),
+(6592,6537,'13750b12-f12c-41f7-bf47-5738a36e223d','Xã Mỹ Quới','000.26.20.H51','efaf3ad4-974b-4590-a2fd-1b81b12c2c2d',1,'2024-10-15 21:10:46'),
+(6601,6537,'13750b12-f12c-41f7-bf47-5738a36e223d','Xã Tân Long','000.24.20.H51','48c7804a-c5a9-488a-8093-63d299f2351e',1,'2024-10-15 21:10:46'),
+(6610,6537,'13750b12-f12c-41f7-bf47-5738a36e223d','Phường 3 - Thị xã Ngã Năm','000.21.20.H51','57ca9f32-2193-44a9-a348-0be19a8b6b93',1,'2024-10-15 21:10:46'),
+(6619,6537,'13750b12-f12c-41f7-bf47-5738a36e223d','Xã Vĩnh Quới','000.25.20.H51','fb76e385-7c7a-46ce-a25a-bd87582b1e39',1,'2024-10-15 21:10:46'),
+(6647,6628,'037b859f-35e3-4938-9378-f2ad5b9e718e','Phường 1 - Thị xã Vĩnh Châu','000.18.22.H51','4d97598d-238d-4596-8a4d-11acc8e25b4d',1,'2024-10-15 21:10:46'),
+(6656,6628,'037b859f-35e3-4938-9378-f2ad5b9e718e','Phường 2 - Thị xã Vĩnh Châu','000.19.22.H51','8cb97894-ed04-4f6b-ad8d-93741e103f72',1,'2024-10-15 21:10:46'),
+(6665,6628,'037b859f-35e3-4938-9378-f2ad5b9e718e','Phường Khánh Hòa','000.20.22.H51','5c95bf47-ae6f-4ff8-97f9-c7dc40d209cb',1,'2024-10-15 21:10:46'),
+(6674,6628,'037b859f-35e3-4938-9378-f2ad5b9e718e','Phường Vĩnh Phước','000.21.22.H51','54d9ddbd-3966-47fb-a770-5adac580f70d',1,'2024-10-15 21:10:46'),
+(6683,6628,'037b859f-35e3-4938-9378-f2ad5b9e718e','Xã Hòa Đông','000.27.22.H51','ec68b2b0-9a97-4823-9c05-94a044b3538d',1,'2024-10-15 21:10:46'),
+(6692,6628,'037b859f-35e3-4938-9378-f2ad5b9e718e','Xã Lạc Hòa','000.25.22.H51','2768200a-2975-470c-834d-e213a2289090',1,'2024-10-15 21:10:46'),
+(6701,6628,'037b859f-35e3-4938-9378-f2ad5b9e718e','Xã Lai Hòa','000.23.22.H51','793b4aa6-9835-4c41-a85b-e2a2f8520abf',1,'2024-10-15 21:10:46'),
+(6710,6628,'037b859f-35e3-4938-9378-f2ad5b9e718e','Xã Vĩnh Hải','000.24.22.H51','33e1b61a-311f-400b-b9dc-f79a3f738435',1,'2024-10-15 21:10:46'),
+(6719,6628,'037b859f-35e3-4938-9378-f2ad5b9e718e','Xã Vĩnh Hiệp','000.26.22.H51','7b76b009-9f13-4145-b8d6-d4f81cb40731',1,'2024-10-15 21:10:46'),
+(6728,6628,'037b859f-35e3-4938-9378-f2ad5b9e718e','Xã Vĩnh Tân','000.22.22.H51','ff835cee-170d-44ad-93c9-f939eee6f590',1,'2024-10-15 21:10:46'),
+(6756,6737,'4de5668b-61df-4e28-af1f-a080aa0dae3f','Thị trấn Châu Thành','000.17.25.H51','084f6979-a1c3-427b-a9e3-86ce1265e3a9',1,'2024-10-15 21:10:46'),
+(6768,6737,'4de5668b-61df-4e28-af1f-a080aa0dae3f','Xã Hồ Đắc Kiện','000.22.25.H51','3e485511-e4ba-4399-a034-e135ca107514',1,'2024-10-15 21:10:46'),
+(6777,6737,'4de5668b-61df-4e28-af1f-a080aa0dae3f','Xã Phú Tâm','000.21.25.H51','f0cbb3d5-b4b8-4b47-b101-6bd2cb1c6f3a',1,'2024-10-15 21:10:46'),
+(6786,6737,'4de5668b-61df-4e28-af1f-a080aa0dae3f','Xã Thuận Hòa','000.23.25.H51','23133a9f-96c0-43ce-9a1f-95bf0e2e5d67',1,'2024-10-15 21:10:46'),
+(6796,6737,'4de5668b-61df-4e28-af1f-a080aa0dae3f','Xã Phú Tân','000.20.25.H51','c937b8b9-7af7-4df2-b1b0-db13b81cc4f7',1,'2024-10-15 21:10:46'),
+(6805,6737,'4de5668b-61df-4e28-af1f-a080aa0dae3f','Xã Thiện Mỹ','000.24.25.H51','aaaf57ab-a434-48d1-9171-cba9e397974a',1,'2024-10-15 21:10:46'),
+(6814,6737,'4de5668b-61df-4e28-af1f-a080aa0dae3f','Xã An Hiệp','000.19.25.H51','86050ff1-d3b4-478c-8b83-925211ca368a',1,'2024-10-15 21:10:46'),
+(6823,6737,'4de5668b-61df-4e28-af1f-a080aa0dae3f','Xã An Ninh','000.18.25.H51','f5a60ee9-6149-4dbb-8d87-fdd8758e531d',1,'2024-10-15 21:10:46'),
+(6851,6832,'f145105f-5c67-4a6f-b44c-6d5497af46ca','Thị Trấn Kế Sách','000.18.29.H51','11f00852-7fba-48f5-93aa-6927ef464f9c',1,'2024-10-15 21:10:46'),
+(6861,6832,'f145105f-5c67-4a6f-b44c-6d5497af46ca','Thị trấn An Lạc Thôn','000.19.29.H51','144d8cdf-cc6b-4bfb-a59e-fce186d04447',1,'2024-10-15 21:10:46'),
+(6870,6832,'f145105f-5c67-4a6f-b44c-6d5497af46ca','Xã An Lạc Tây','000.27.29.H51','28dc8e08-ce0f-414d-a603-55d488e1ad4c',1,'2024-10-15 21:10:46'),
+(6879,6832,'f145105f-5c67-4a6f-b44c-6d5497af46ca','Xã An Mỹ','000.20.29.H51','98510b86-56c3-4c8d-a6e9-b175e92d4792',1,'2024-10-15 21:10:46'),
+(6888,6832,'f145105f-5c67-4a6f-b44c-6d5497af46ca','Xã Ba Trinh','000.26.29.H51','562b0768-8090-43da-888a-c92167d8aa75',1,'2024-10-15 21:10:46'),
+(6897,6832,'f145105f-5c67-4a6f-b44c-6d5497af46ca','Xã Đại Hải','000.29.29.H51','dcb5a9a1-c06a-425d-8a1e-07888f7177fd',1,'2024-10-15 21:10:46'),
+(6906,6832,'f145105f-5c67-4a6f-b44c-6d5497af46ca','Xã Kế An','000.25.29.H51','22ba14cc-dd02-4d3e-9a22-2ae8df10615f',1,'2024-10-15 21:10:46'),
+(6915,6832,'f145105f-5c67-4a6f-b44c-6d5497af46ca','Xã Kế Thành','000.24.29.H51','698ab6d0-61ef-40bf-9b12-32f2cf1bacaa',1,'2024-10-15 21:10:46'),
+(6924,6832,'f145105f-5c67-4a6f-b44c-6d5497af46ca','Xã Nhơn Mỹ','000.28.29.H51','c05b15ed-edfa-41f6-98e4-88155ae28d56',1,'2024-10-15 21:10:46'),
+(6933,6832,'f145105f-5c67-4a6f-b44c-6d5497af46ca','Xã Phong Nẫm','000.23.29.H51','2e268616-a524-433e-8328-ab8d276a0b20',1,'2024-10-15 21:10:46'),
+(6942,6832,'f145105f-5c67-4a6f-b44c-6d5497af46ca','Xã Thới An Hội','000.21.29.H51','aa3176c4-f91d-4c9f-95d0-d10b78e97ab7',1,'2024-10-15 21:10:46'),
+(6951,6832,'f145105f-5c67-4a6f-b44c-6d5497af46ca','Xã Trinh Phú','000.22.29.H51','8eb1c685-73c8-43d9-9052-741bf6a8b502',1,'2024-10-15 21:10:46'),
+(6960,6832,'f145105f-5c67-4a6f-b44c-6d5497af46ca','Xã Xuân Hòa','000.30.29.H51','a96d8dd0-74f9-43f4-aa2d-d18db58367e0',1,'2024-10-15 21:10:46'),
+(6988,6969,'c2856dae-c2e5-4a06-825e-a793ec0d210e','Thị Trấn Long Phú ','000.19.24.H51','1b3068b9-10eb-4f3a-ad8e-8d9af62b3c9d',1,'2024-10-15 21:10:46'),
+(6999,6969,'c2856dae-c2e5-4a06-825e-a793ec0d210e','Thị trấn Đại Ngãi','000.20.24.H51','d73c85e4-fc12-4b6c-8354-b953f5351190',1,'2024-10-15 21:10:46'),
+(7009,6969,'c2856dae-c2e5-4a06-825e-a793ec0d210e','Xã Châu Khánh','000.26.24.H51','ce7142a8-8221-483c-b085-bdd925679f63',1,'2024-10-15 21:10:46'),
+(7019,6969,'c2856dae-c2e5-4a06-825e-a793ec0d210e','Xã Hậu Thạnh','000.24.24.H51','4594b94a-2a9e-413a-86cb-82d836b98345',1,'2024-10-15 21:10:46'),
+(7028,6969,'c2856dae-c2e5-4a06-825e-a793ec0d210e','Xã Long Đức','000.21.24.H51','62649c8c-ed8c-46ff-8d2a-c2cc5bc623d2',1,'2024-10-15 21:10:46'),
+(7037,6969,'c2856dae-c2e5-4a06-825e-a793ec0d210e','Xã Long Phú','000.25.24.H51','c1fd04b7-bd39-48d3-bc9b-32582519f69d',1,'2024-10-15 21:10:46'),
+(7047,6969,'c2856dae-c2e5-4a06-825e-a793ec0d210e','Xã Phú Hữu','000.22.24.H51','db817345-841b-46f1-bae3-e40238bdd4c6',1,'2024-10-15 21:10:46'),
+(7057,6969,'c2856dae-c2e5-4a06-825e-a793ec0d210e','Xã Song Phụng','000.23.24.H51','99474943-1195-458f-b9a0-169ae4b0705a',1,'2024-10-15 21:10:46'),
+(7068,6969,'c2856dae-c2e5-4a06-825e-a793ec0d210e','Xã Tân Hưng','000.28.24.H51','4217a242-5b6f-4d86-86ac-501d7bb38072',1,'2024-10-15 21:10:46'),
+(7078,6969,'c2856dae-c2e5-4a06-825e-a793ec0d210e','Xã Tân Thạnh','000.27.24.H51','0c80ed51-304a-406f-98c5-21c7e5b701b1',1,'2024-10-15 21:10:46'),
+(7088,6969,'c2856dae-c2e5-4a06-825e-a793ec0d210e','Xã Trường Khánh','000.29.24.H51','1216f39f-7c21-4ea6-adcf-d80bb6dd19a8',1,'2024-10-15 21:10:46'),
+(7117,7097,'fb328019-1985-48e1-aae8-6e1cd78a3c41','Thị trấn Huỳnh Hữu Nghĩa','000.18.26.H51','70b7e128-d6cf-47f1-8c42-dfe04303e7bb',1,'2024-10-15 21:10:46'),
+(7128,7097,'fb328019-1985-48e1-aae8-6e1cd78a3c41','Xã Hưng Phú','000.21.26.H51','93e21619-f431-4fa6-8641-9e02c2aef924',1,'2024-10-15 21:10:46'),
+(7137,7097,'fb328019-1985-48e1-aae8-6e1cd78a3c41','Xã Long Hưng','000.22.26.H51','cbf1f318-11fd-4218-8e9f-b07df45775ba',1,'2024-10-15 21:10:46'),
+(7147,7097,'fb328019-1985-48e1-aae8-6e1cd78a3c41','Xã Mỹ Hương','000.20.26.H51','db2a95bf-a54e-4071-9aa2-a0b6f9d9eaed',1,'2024-10-15 21:10:46'),
+(7156,7097,'fb328019-1985-48e1-aae8-6e1cd78a3c41','Xã Mỹ Phước','000.23.26.H51','3b8f8714-5b8f-4489-8bf2-241b83709270',1,'2024-10-15 21:10:46'),
+(7165,7097,'fb328019-1985-48e1-aae8-6e1cd78a3c41','Xã Mỹ Tú','000.19.26.H51','4353964c-0327-44c1-adce-f691bebbfe9a',1,'2024-10-15 21:10:46'),
+(7174,7097,'fb328019-1985-48e1-aae8-6e1cd78a3c41','Xã Mỹ Thuận','000.24.26.H51','a15894ce-01e1-41b4-822b-cc68622ac9ab',1,'2024-10-15 21:10:46'),
+(7183,7097,'fb328019-1985-48e1-aae8-6e1cd78a3c41','Xã Phú Mỹ','000.25.26.H51','e359ebd6-f838-4279-93be-8478fd7694c2',1,'2024-10-15 21:10:46'),
+(7192,7097,'fb328019-1985-48e1-aae8-6e1cd78a3c41','Xã Thuận Hưng','000.26.26.H51','88e5d631-df9f-4281-8f17-f7be116d1706',1,'2024-10-15 21:10:46'),
+(7220,7201,'b3add223-54b0-4c3a-a7e7-1f97285f622c','Thị Trấn Mỹ Xuyên','000.18.28.H51','686d56f6-6b84-4c89-9de9-886cab2ab38d',1,'2024-10-15 21:10:46'),
+(7229,7201,'b3add223-54b0-4c3a-a7e7-1f97285f622c','Xã Đại Tâm','000.21.28.H51','78e6d96d-da07-4a1d-8ead-1dde26979386',1,'2024-10-15 21:10:46'),
+(7238,7201,'b3add223-54b0-4c3a-a7e7-1f97285f622c','Xã Gia Hòa 1','000.19.28.H51','be954deb-1a99-415e-8c6b-8993e0eb1af3',1,'2024-10-15 21:10:46'),
+(7247,7201,'b3add223-54b0-4c3a-a7e7-1f97285f622c','Xã Gia Hòa 2','000.20.28.H51','36d1e769-29dc-4d0f-990a-80921ddd4cfc',1,'2024-10-15 21:10:46'),
+(7256,7201,'b3add223-54b0-4c3a-a7e7-1f97285f622c','Xã Hòa Tú 1','000.27.28.H51','53f7b7e1-d5fd-4207-90f5-4a494f1178bc',1,'2024-10-15 21:10:46'),
+(7265,7201,'b3add223-54b0-4c3a-a7e7-1f97285f622c','Xã Hòa Tú 2','000.28.28.H51','8533b951-107b-4805-b8d6-9b5e8f723844',1,'2024-10-15 21:10:46'),
+(7274,7201,'b3add223-54b0-4c3a-a7e7-1f97285f622c','Xã Ngọc Đông','000.24.28.H51','8f5b1f22-c2c0-471e-be96-334c260b6c9a',1,'2024-10-15 21:10:46'),
+(7283,7201,'b3add223-54b0-4c3a-a7e7-1f97285f622c','Xã Ngọc Tố','000.23.28.H51','666ef0c9-1da1-42c9-8071-880fa32e5f3f',1,'2024-10-15 21:10:46'),
+(7292,7201,'b3add223-54b0-4c3a-a7e7-1f97285f622c','Xã Tham Đôn','000.22.28.H51','d85f729a-0527-44fa-8ccc-1f2ffacae352',1,'2024-10-15 21:10:46'),
+(7301,7201,'b3add223-54b0-4c3a-a7e7-1f97285f622c','Xã Thạnh Phú','000.26.28.H51','260d6ae7-c31c-4f2c-8dfa-cb151d43ab3b',1,'2024-10-15 21:10:46'),
+(7310,7201,'b3add223-54b0-4c3a-a7e7-1f97285f622c','Xã Thạnh Quới','000.25.28.H51','6f9a44f5-1100-44bc-9437-4bbb6091ccdc',1,'2024-10-15 21:10:46'),
+(7338,7319,'fa544881-00f3-4f00-8937-1e5ecf82eb1c','Thị trấn Phú Lộc','000.19.27.H51','2e700642-62d2-4269-89eb-bf03b0093b9e',1,'2024-10-15 21:10:46'),
+(7347,7319,'fa544881-00f3-4f00-8937-1e5ecf82eb1c','Thị trấn Hưng Lợi','000.20.27.H51','cdb6beec-3c1c-4555-a4cd-0a155dbd4c9c',1,'2024-10-15 21:10:46'),
+(7356,7319,'fa544881-00f3-4f00-8937-1e5ecf82eb1c','Xã Châu Hưng','000.21.27.H51','eab7e968-b40f-4657-86cb-bd41a43557f2',1,'2024-10-15 21:10:46'),
+(7365,7319,'fa544881-00f3-4f00-8937-1e5ecf82eb1c','Xã Lâm Kiết','000.28.27.H51','5d6b5a01-aacd-4805-af30-b1ab64fd8cab',1,'2024-10-15 21:10:46'),
+(7374,7319,'fa544881-00f3-4f00-8937-1e5ecf82eb1c','Xã Lâm Tân','000.27.27.H51','10f49a73-9971-45a4-b43b-9a45d9e43120',1,'2024-10-15 21:10:46'),
+(7383,7319,'fa544881-00f3-4f00-8937-1e5ecf82eb1c','Xã Tuân Tức','000.26.27.H51','36f6b338-dad7-4d5d-9b7c-6b579f8c7768',1,'2024-10-15 21:10:46'),
+(7392,7319,'fa544881-00f3-4f00-8937-1e5ecf82eb1c','Xã Thạnh Tân','000.25.27.H51','e4db6dc2-545b-4448-bcd1-763d466352a9',1,'2024-10-15 21:10:46'),
+(7401,7319,'fa544881-00f3-4f00-8937-1e5ecf82eb1c','Xã Thạnh Trị','000.24.27.H51','c58309d9-a0ff-43cc-acfb-2aeb53a88bdf',1,'2024-10-15 21:10:46'),
+(7410,7319,'fa544881-00f3-4f00-8937-1e5ecf82eb1c','Xã Vĩnh Lợi','000.22.27.H51','27efe8bc-b5f2-4661-9c76-90be71e6fb89',1,'2024-10-15 21:10:46'),
+(7419,7319,'fa544881-00f3-4f00-8937-1e5ecf82eb1c','Xã Vĩnh Thành','000.23.27.H51','eb70a276-8404-49be-bb0f-ea26ccc91be3',1,'2024-10-15 21:10:46'),
+(7448,7428,'dd99d443-73a3-4c25-bc99-d6369bc1a7a5','Thị Trấn Lịch Hội Thượng','000.17.21.H51','40bbe26e-a71a-49b6-93ce-68c51a43418a',1,'2024-10-15 21:10:46'),
+(7457,7428,'dd99d443-73a3-4c25-bc99-d6369bc1a7a5','Thị trấn Trần Đề','000.18.21.H51','6eef79b1-4eab-4573-8324-0f5c69d4a54a',1,'2024-10-15 21:10:46'),
+(7466,7428,'dd99d443-73a3-4c25-bc99-d6369bc1a7a5','Xã Đại Ân  2','000.27.21.H51','d56e8889-ddd7-4b3f-ac2a-00f17d25ea4f',1,'2024-10-15 21:10:46'),
+(7475,7428,'dd99d443-73a3-4c25-bc99-d6369bc1a7a5','Xã Lịch Hội Thượng','000.25.21.H51','0e041842-6c29-43e2-bcd9-feaf12757976',1,'2024-10-15 21:10:46'),
+(7484,7428,'dd99d443-73a3-4c25-bc99-d6369bc1a7a5','Xã Liêu Tú','000.24.21.H51','a73e499c-da25-4a72-a6f7-e82e3e57b060',1,'2024-10-15 21:10:46'),
+(7493,7428,'dd99d443-73a3-4c25-bc99-d6369bc1a7a5','Xã Tài Văn','000.20.21.H51','eab02730-91f3-4458-92b1-a3ef408cc92c',1,'2024-10-15 21:10:46'),
+(7502,7428,'dd99d443-73a3-4c25-bc99-d6369bc1a7a5','Xã Thạnh Thới An','000.26.21.H51','6d667382-0f79-4f50-abc4-d7fb950dfcf0',1,'2024-10-15 21:10:46'),
+(7511,7428,'dd99d443-73a3-4c25-bc99-d6369bc1a7a5','Xã Thạnh Thới Thuận','000.19.21.H51','ccc49ee7-5e54-41a6-8b5f-70b54a458146',1,'2024-10-15 21:10:46'),
+(7520,7428,'dd99d443-73a3-4c25-bc99-d6369bc1a7a5','Xã Trung Bình','000.23.21.H51','4634a493-c13f-4206-9d92-6afb396e89b1',1,'2024-10-15 21:10:46'),
+(7529,7428,'dd99d443-73a3-4c25-bc99-d6369bc1a7a5','Xã Viên An','000.21.21.H51','32cc5d26-6f36-49d8-aea0-936838d12fa0',1,'2024-10-15 21:10:46'),
+(7538,7428,'dd99d443-73a3-4c25-bc99-d6369bc1a7a5','Xã Viên Bình','000.22.21.H51','61bee174-a275-4a45-bbac-d4f0a3ed43f0',1,'2024-10-15 21:10:46'),
+(7566,7547,'94565fbc-aa54-48a4-af90-a61d69a6fce2','Thị trấn Cù Lao Dung','000.18.23.H51','c013ddb3-3018-4f9c-9c53-6b7815621963',1,'2024-10-15 21:10:46'),
+(7575,7547,'94565fbc-aa54-48a4-af90-a61d69a6fce2','Xã An Thạnh 1','000.25.23.H51','32acbffd-796a-4266-8dee-f0a4019389fc',1,'2024-10-15 21:10:46'),
+(7584,7547,'94565fbc-aa54-48a4-af90-a61d69a6fce2','Xã An Thạnh 2','000.19.23.H51','f2d86c8f-e778-409e-96e5-078d3cc83cb7',1,'2024-10-15 21:10:46'),
+(7593,7547,'94565fbc-aa54-48a4-af90-a61d69a6fce2','Xã An Thạnh 3','000.20.23.H51','cd41cff4-518f-465e-a8e3-b2e9df4795c9',1,'2024-10-15 21:10:46'),
+(7603,7547,'94565fbc-aa54-48a4-af90-a61d69a6fce2','Xã An Thạnh Đông','000.21.23.H51','132f146b-c6ea-429e-904d-9b5b688318c6',1,'2024-10-15 21:10:46'),
+(7612,7547,'94565fbc-aa54-48a4-af90-a61d69a6fce2','Xã An Thạnh Nam','000.22.23.H51','10663e4f-85d2-480e-aa8f-4680b9afebbe',1,'2024-10-15 21:10:46'),
+(7621,7547,'94565fbc-aa54-48a4-af90-a61d69a6fce2','Xã An Thạnh Tây','000.23.23.H51','f8b2176b-b6f3-44a2-a89b-4449a3b12b73',1,'2024-10-15 21:10:46'),
+(7631,7547,'94565fbc-aa54-48a4-af90-a61d69a6fce2','Xã Đại Ân 1','000.24.23.H51','73f397df-be83-454c-a77b-808b21ffc499',1,'2024-10-15 21:10:46');
 
 /*Table structure for table `manage_qr_code` */
 
@@ -4920,49 +4919,28 @@ CREATE TABLE `manage_qr_code` (
   `ID_XA` int(11) DEFAULT NULL,
   `ID_LINH_VUC` int(11) DEFAULT NULL,
   `NGUOI_TAO` int(11) DEFAULT NULL,
-  `DUONG_DAN` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `TRANG_THAI` int(2) DEFAULT 1,
-  `TIME_CREATE` datetime DEFAULT current_timestamp(),
+  `DUONG_DAN` text COLLATE utf8mb4_unicode_ci,
+  `TRANG_THAI` int(2) DEFAULT '1',
+  `TIME_CREATE` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`),
   KEY `ID_DON_VI` (`ID_DON_VI`),
   KEY `ID_LINH_VUC` (`ID_LINH_VUC`),
   KEY `ID_TINH` (`ID_TINH`),
   KEY `NGUOI_TAO` (`NGUOI_TAO`),
-  KEY `ID_HUYEN` (`ID_HUYEN`),
+  KEY `ID_HUYEN` (`ID_HUYEN`(191)),
   KEY `ID_XA` (`ID_XA`),
   CONSTRAINT `manage_qr_code_ibfk_1` FOREIGN KEY (`ID_DON_VI`) REFERENCES `dm_donvi` (`ID`),
   CONSTRAINT `manage_qr_code_ibfk_10` FOREIGN KEY (`ID_LINH_VUC`) REFERENCES `dm_linhvuc` (`ID_LINH_VUC`),
   CONSTRAINT `manage_qr_code_ibfk_3` FOREIGN KEY (`ID_TINH`) REFERENCES `dm_tinh` (`ID_TINH`),
   CONSTRAINT `manage_qr_code_ibfk_6` FOREIGN KEY (`NGUOI_TAO`) REFERENCES `dm_nhanvien` (`MA_NHAN_VIEN`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `manage_qr_code` */
 
 insert  into `manage_qr_code`(`ID`,`ID_DON_VI`,`ID_TINH`,`ID_HUYEN`,`ID_XA`,`ID_LINH_VUC`,`NGUOI_TAO`,`DUONG_DAN`,`TRANG_THAI`,`TIME_CREATE`) values 
-(1,1,61,'cc7889b2-a00f-4749-9b4b-8b9a0a87dc12',-1,851,1,'https://dichvucong.soctrang.gov.vn/nop-ho-so?ma=1.005435.000.00.00.H51&maDonVi=000.00.12.H51&organizationGuid=cc7889b2-a00f-4749-9b4b-8b9a0a87dc12&ttId=11772&ttGuid=37b80a4e-3641-4bf6-ba09-5702605ef851',1,'2024-10-17 01:34:41');
-
-/* Procedure structure for procedure `p_dangnhap` */
-
-/*!50003 DROP PROCEDURE IF EXISTS  `p_dangnhap` */;
-
-DELIMITER $$
-
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_dangnhap`(p_taikhoan VARCHAR(1024), p_matkhau VARCHAR(2048))
-BEGIN
-	DECLARE v_kt INT(10) DEFAULT 0;
-	
-	SELECT COUNT(*) INTO v_kt FROM dm_nhanvien WHERE p_taikhoan = TAI_KHOAN AND p_matkhau = PASSWORD AND TRANGTHAI = 1;
-	
-	IF v_kt = 0 THEN
-		SELECT '-1' AS MA_NHAN_VIEN,'-1' AS MA_DON_VI, '-1' AS TEN_NHAN_VIEN,'-1' AS ADMIN,
-		'-1' AS TRANGTHAI,'-1' AS SO_DIEN_THOAI, '-1' AS MENU, '' AS TUOI, '' AS DIA_CHI, '' AS GIOI_TINH, '' AS NGAY_SINH, '' AS SO_CCCD, '' AS TENDONVI, '' AS AVATAR, 'Tài khoản không tồn tại' AS TAI_KHOAN FROM DUAL;
-	ELSE
-		SELECT t.MA_NHAN_VIEN, t.MA_DON_VI, t.TEN_NHAN_VIEN, t.ADMIN, t.TRANGTHAI, t.SO_DIEN_THOAI, t.MENU, t.TUOI, t.DIA_CHI, t.GIOI_TINH, t.NGAY_SINH, t.SO_CCCD, dv.TENDONVI, t.AVATAR, t.TAI_KHOAN
-		FROM dm_nhanvien t, dm_donvi dv
-		WHERE p_taikhoan = t.TAI_KHOAN AND p_matkhau = t.PASSWORD AND t.MA_DON_VI = dv.ID AND t.TRANGTHAI = 1;
-	END IF;
-END */$$
-DELIMITER ;
+(1,1,61,'f145105f-5c67-4a6f-b44c-6d5497af46ca',6851,2567,1,'https://dichvucong.soctrang.gov.vn/nop-ho-so?ma=2.000635.000.00.00.H51&maDonVi=000.18.29.H51&organizationGuid=11f00852-7fba-48f5-93aa-6927ef464f9c&ttId=12261&ttGuid=0d932e33-5c6f-44cb-8a8f-8dad9ea6d172',1,'2024-10-17 16:18:56'),
+(2,1,61,'26b706cc-8169-4a21-8f71-2ad42d1eab16',-1,663,1,'https://dichvucong.soctrang.gov.vn/nop-ho-so?ma=2.000465.000.00.00.H51&maDonVi=000.00.08.H51&organizationGuid=26b706cc-8169-4a21-8f71-2ad42d1eab16&ttId=12478&ttGuid=89d35437-e7b8-4d27-8377-4bdbfd6f55e2',1,'2024-10-17 16:29:04'),
+(3,1,61,'f145105f-5c67-4a6f-b44c-6d5497af46ca',6861,2813,1,'https://dichvucong.soctrang.gov.vn/nop-ho-so?ma=1.012796.000.00.00.H51&maDonVi=000.19.29.H51&organizationGuid=144d8cdf-cc6b-4bfb-a59e-fce186d04447&ttId=13898&ttGuid=807f7830-1ac1-4fe0-95e5-3b5b90b9828d',1,'2024-10-17 16:35:35');
 
 /* Procedure structure for procedure `p_get_duong_dan` */
 
@@ -4970,7 +4948,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_get_duong_dan`(
+/*!50003 CREATE PROCEDURE `p_get_duong_dan`(
 	p_madonvi varchar(150),
 	p_id_manage_qr varchar(20)
 )
@@ -4988,7 +4966,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_get_huyen`(
+/*!50003 CREATE PROCEDURE `p_get_huyen`(
 	p_id_tinh varchar(100)
 )
 BEGIN
@@ -4999,13 +4977,36 @@ BEGIN
     END */$$
 DELIMITER ;
 
+/* Procedure structure for procedure `p_dangnhap` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `p_dangnhap` */;
+
+DELIMITER $$
+
+/*!50003 CREATE PROCEDURE `p_dangnhap`(p_taikhoan VARCHAR(1024), p_matkhau VARCHAR(2048))
+BEGIN
+	DECLARE v_kt INT(10) DEFAULT 0;
+	
+	SELECT COUNT(*) INTO v_kt FROM dm_nhanvien WHERE p_taikhoan = TAI_KHOAN AND p_matkhau = PASSWORD AND TRANGTHAI = 1;
+	
+	IF v_kt = 0 THEN
+		SELECT '-1' AS MA_NHAN_VIEN,'-1' AS MA_DON_VI, '-1' AS TEN_NHAN_VIEN,'-1' AS ADMIN,
+		'-1' AS TRANGTHAI,'-1' AS SO_DIEN_THOAI, '-1' AS MENU, '' AS TUOI, '' AS DIA_CHI, '' AS GIOI_TINH, '' AS NGAY_SINH, '' AS SO_CCCD, '' AS TENDONVI, '' AS AVATAR, 'Tài khoản không tồn tại' AS TAI_KHOAN FROM DUAL;
+	ELSE
+		SELECT t.MA_NHAN_VIEN, t.MA_DON_VI, t.TEN_NHAN_VIEN, t.ADMIN, t.TRANGTHAI, t.SO_DIEN_THOAI, t.MENU, t.TUOI, t.DIA_CHI, t.GIOI_TINH, t.NGAY_SINH, t.SO_CCCD, dv.TENDONVI, t.AVATAR, t.TAI_KHOAN
+		FROM dm_nhanvien t, dm_donvi dv
+		WHERE p_taikhoan = t.TAI_KHOAN AND p_matkhau = t.PASSWORD AND t.MA_DON_VI = dv.ID AND t.TRANGTHAI = 1;
+	END IF;
+END */$$
+DELIMITER ;
+
 /* Procedure structure for procedure `p_get_linhvuc` */
 
 /*!50003 DROP PROCEDURE IF EXISTS  `p_get_linhvuc` */;
 
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_get_linhvuc`(
+/*!50003 CREATE PROCEDURE `p_get_linhvuc`(
 	p_organization varchar(200),
 	p_loaithutuc varchar(20)
 )
@@ -5013,19 +5014,94 @@ BEGIN
 	if p_loaithutuc = 1 then
 		select distinct LINH_VUC_MA, LINH_VUC_TEN
 		from dm_linhvuc
-		where (ORANIZATION = p_organization or p_organization = '-1') and (LOAI_ITEM_LTTID = 0 or LOAI_ITEM_LTTID = 1)
+		where ORANIZATION = p_organization and (LOAI_ITEM_LTTID = 0 or LOAI_ITEM_LTTID = 1)
 		order by LINH_VUC_TEN;
 	elseif p_loaithutuc = 2 then
 		SELECT DISTINCT LINH_VUC_MA, LINH_VUC_TEN
 		FROM dm_linhvuc
-		WHERE (ORANIZATION = p_organization OR p_organization = '-1') AND (LOAI_ITEM_LTTID = 0 OR LOAI_ITEM_LTTID = 2)
+		WHERE ORANIZATION = p_organization AND (LOAI_ITEM_LTTID = 0 OR LOAI_ITEM_LTTID = 2)
 		ORDER BY LINH_VUC_TEN;
 	else
 		SELECT DISTINCT LINH_VUC_MA, LINH_VUC_TEN
 		FROM dm_linhvuc
-		WHERE (ORANIZATION = p_organization OR p_organization = '-1')
+		WHERE ORANIZATION = p_organization
 		ORDER BY LINH_VUC_TEN;
 	end if;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `p_get_tinh` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `p_get_tinh` */;
+
+DELIMITER $$
+
+/*!50003 CREATE PROCEDURE `p_get_tinh`(
+)
+BEGIN
+	select * 
+	from dm_tinh;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `p_get_url` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `p_get_url` */;
+
+DELIMITER $$
+
+/*!50003 CREATE PROCEDURE `p_get_url`(
+	p_loai_url varchar(20)
+)
+BEGIN
+	select *
+	from dm_duong_dan
+	where loai = p_loai_url and trang_thai = 1;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `p_get_xa` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `p_get_xa` */;
+
+DELIMITER $$
+
+/*!50003 CREATE PROCEDURE `p_get_xa`(
+	p_id_huyen varchar(100)
+)
+BEGIN
+	select *
+	from dm_xa_phuong_tt
+	where QH_GUID = p_id_huyen
+	order by ten_xa;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `p_update_url_qrcode` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `p_update_url_qrcode` */;
+
+DELIMITER $$
+
+/*!50003 CREATE PROCEDURE `p_update_url_qrcode`(
+	p_madonvi VARCHAR(150),
+	p_id_qr_code VARCHAR(150),
+	p_url text
+)
+BEGIN
+	declare v_check int(2);
+	DECLARE v_kq INT(2);
+	
+	select count(*) into v_check from manage_qr_code where id = p_id_qr_code and id_don_vi = p_madonvi;
+	if v_check > 0 then
+		update manage_qr_code set duong_dan =  p_url WHERE id = p_id_qr_code AND id_don_vi = p_madonvi;
+		SELECT ROW_COUNT() INTO v_kq;
+	else
+		set v_kq = 0;
+	end if;
+	
+	select v_kq as KET_QUA from dual;
+	
     END */$$
 DELIMITER ;
 
@@ -5035,19 +5111,19 @@ DELIMITER ;
 
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_get_list_qr_code`(
+/*!50003 CREATE PROCEDURE `p_get_list_qr_code`(
 	p_madonvi varchar(150)
 )
 BEGIN
-	select aa.ID, aa.ID_DON_VI, dv.TENDONVI, lv.TEN_LINH_VUC, t.TEN_TINH, h.TEN_HUYEN, p.TEN_XA, nv.TEN_NHAN_VIEN, case when aa.TRANG_THAI = 1 then 'Hoạt động' else 'Đã hủy' end as TRANG_THAI, DATE_FORMAT(aa.TIME_CREATE,'%d/%m/%Y %H:%i:%s') as TIME_CREATE
+	select aa.ID, aa.ID_DON_VI, dv.TENDONVI, lv.TEN_LINH_VUC as TEN_THU_TUC, lv.LINH_VUC_TEN, t.TEN_TINH, h.TEN_HUYEN, p.TEN_XA, nv.TEN_NHAN_VIEN, case when aa.TRANG_THAI = 1 then 'Hoạt động' else 'Đã hủy' end as TRANG_THAI, DATE_FORMAT(aa.TIME_CREATE,'%d/%m/%Y %H:%i:%s') as TIME_CREATE
 	from manage_qr_code aa 
 		left join dm_tinh t on aa.ID_TINH = t.ID_TINH
-		left join dm_huyen h on aa.ID_HUYEN = h.ID_HUYEN
+		left join dm_huyen h on aa.ID_HUYEN = h.QH_GUID
 		left join dm_xa_phuong_tt p on aa.ID_XA = p.ID_XA,
 	     dm_donvi dv, dm_linhvuc lv, dm_nhanvien nv
 	 where aa.ID_DON_VI = p_madonvi and aa.ID_DON_VI = dv.ID and dv.ID = p_madonvi
 		and aa.ID_LINH_VUC = lv.ID_LINH_VUC and lv.trang_thai = 1 and aa.NGUOI_TAO = nv.MA_NHAN_VIEN
-	order by dv.TENDONVI, t.TEN_TINH, h.TEN_HUYEN, p.TEN_XA;
+	order by aa.ID, dv.TENDONVI, t.TEN_TINH, h.TEN_HUYEN, p.TEN_XA;
     END */$$
 DELIMITER ;
 
@@ -5057,7 +5133,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_get_thongtin_qr_code`(
+/*!50003 CREATE PROCEDURE `p_get_thongtin_qr_code`(
 	p_madonvi varchar(150),
 	p_id_qr_code varchar(150)
 )
@@ -5066,7 +5142,7 @@ BEGIN
 	declare v_check_so_ban_nganh int(1) default 0;
 	
 	select ID_HUYEN into v_mahuyen_tochuc from manage_qr_code where ID = p_id_qr_code AND ID_DON_VI = p_madonvi;
-	select count(*) into v_check_so_ban_nganh from dm_huyen where QH_GUID = v_mahuyen_tochuc;
+	select count(*) into v_check_so_ban_nganh from dm_huyen where QH_GUID = v_mahuyen_tochuc and SO_BAN_NGANH = 1;
 	
 	if v_check_so_ban_nganh > 0 then
 		SELECT aa.ID, t.ID_TINH, t.TEN_TINH, h.QH_CODE, h.TEN_HUYEN, h.QH_CODE as XP_CODE, h.TEN_HUYEN as TEN_XA, h.QH_GUID as XP_GUID, lv.ITEM_ID, lv.ITEM_GUID, lv.ITEM_MA, lv.TEN_LINH_VUC, CASE WHEN lv.LOAI_ITEM_LTTID = 1 THEN 'Công dân' ELSE 'Tổ chức' END AS LOAI_ITEM_LTTID, lv.LINH_VUC_ID, lv.LINH_VUC_GUID, lv.LINH_VUC_MA 
@@ -5079,7 +5155,7 @@ BEGIN
 		select aa.ID, t.ID_TINH, t.TEN_TINH, h.QH_CODE, h.TEN_HUYEN, p.XP_CODE, p.TEN_XA, p.XP_GUID, lv.ITEM_ID, lv.ITEM_GUID, lv.ITEM_MA, lv.TEN_LINH_VUC, case when lv.LOAI_ITEM_LTTID = 1 then 'Cá nhân' else 'Tổ chức' end as LOAI_ITEM_LTTID, lv.LINH_VUC_ID, lv.LINH_VUC_GUID, lv.LINH_VUC_MA 
 		from manage_qr_code aa 
 			left join dm_tinh t on aa.ID_TINH = t.ID_TINH
-			left join dm_huyen h on aa.ID_HUYEN = h.ID_HUYEN
+			left join dm_huyen h on aa.ID_HUYEN = h.QH_GUID
 			left join dm_xa_phuong_tt p on aa.ID_XA = p.ID_XA,
 		     dm_linhvuc lv
 		 where aa.ID = p_id_qr_code and aa.ID_DON_VI = p_madonvi and aa.ID_LINH_VUC = lv.ID_LINH_VUC;
@@ -5093,7 +5169,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_get_thutuc`(
+/*!50003 CREATE PROCEDURE `p_get_thutuc`(
 	p_organization VARCHAR(200),
 	p_loaithutuc VARCHAR(20),
 	p_id_linhvuc VARCHAR(100)
@@ -5118,60 +5194,13 @@ BEGIN
     END */$$
 DELIMITER ;
 
-/* Procedure structure for procedure `p_get_tinh` */
-
-/*!50003 DROP PROCEDURE IF EXISTS  `p_get_tinh` */;
-
-DELIMITER $$
-
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_get_tinh`(
-)
-BEGIN
-	select * 
-	from dm_tinh;
-    END */$$
-DELIMITER ;
-
-/* Procedure structure for procedure `p_get_url` */
-
-/*!50003 DROP PROCEDURE IF EXISTS  `p_get_url` */;
-
-DELIMITER $$
-
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_get_url`(
-	p_loai_url varchar(20)
-)
-BEGIN
-	select *
-	from dm_duong_dan
-	where loai = p_loai_url and trang_thai = 1;
-    END */$$
-DELIMITER ;
-
-/* Procedure structure for procedure `p_get_xa` */
-
-/*!50003 DROP PROCEDURE IF EXISTS  `p_get_xa` */;
-
-DELIMITER $$
-
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_get_xa`(
-	p_id_huyen varchar(100)
-)
-BEGIN
-	select *
-	from dm_xa_phuong_tt
-	where id_huyen = p_id_huyen
-	order by ten_xa;
-    END */$$
-DELIMITER ;
-
 /* Procedure structure for procedure `p_luu_thontin_qr_code` */
 
 /*!50003 DROP PROCEDURE IF EXISTS  `p_luu_thontin_qr_code` */;
 
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_luu_thontin_qr_code`(
+/*!50003 CREATE PROCEDURE `p_luu_thontin_qr_code`(
 	p_idcode VARCHAR(150),
 	p_madonvi varchar(150),
 	p_matinh varchar(150),
@@ -5203,34 +5232,6 @@ BEGIN
 	end if;
 	
 	SELECT v_result AS KET_QUA FROM DUAL;
-    END */$$
-DELIMITER ;
-
-/* Procedure structure for procedure `p_update_url_qrcode` */
-
-/*!50003 DROP PROCEDURE IF EXISTS  `p_update_url_qrcode` */;
-
-DELIMITER $$
-
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_update_url_qrcode`(
-	p_madonvi VARCHAR(150),
-	p_id_qr_code VARCHAR(150),
-	p_url text
-)
-BEGIN
-	declare v_check int(2);
-	DECLARE v_kq INT(2);
-	
-	select count(*) into v_check from manage_qr_code where id = p_id_qr_code and id_don_vi = p_madonvi;
-	if v_check > 0 then
-		update manage_qr_code set duong_dan =  p_url WHERE id = p_id_qr_code AND id_don_vi = p_madonvi;
-		SELECT ROW_COUNT() INTO v_kq;
-	else
-		set v_kq = 0;
-	end if;
-	
-	select v_kq as KET_QUA from dual;
-	
     END */$$
 DELIMITER ;
 
