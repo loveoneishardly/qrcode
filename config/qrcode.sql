@@ -4948,7 +4948,7 @@ insert  into `manage_qr_code`(`ID`,`ID_DON_VI`,`ID_TINH`,`ID_HUYEN`,`ID_XA`,`ID_
 
 DELIMITER $$
 
-/*!50003 CREATE PROCEDURE `p_get_duong_dan`(
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_get_duong_dan`(
 	p_madonvi varchar(150),
 	p_id_manage_qr varchar(20)
 )
@@ -4966,7 +4966,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-/*!50003 CREATE PROCEDURE `p_get_huyen`(
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_get_huyen`(
 	p_id_tinh varchar(100)
 )
 BEGIN
@@ -4983,7 +4983,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-/*!50003 CREATE PROCEDURE `p_dangnhap`(p_taikhoan VARCHAR(1024), p_matkhau VARCHAR(2048))
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_dangnhap`(p_taikhoan VARCHAR(1024), p_matkhau VARCHAR(2048))
 BEGIN
 	DECLARE v_kt INT(10) DEFAULT 0;
 	
@@ -5006,7 +5006,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-/*!50003 CREATE PROCEDURE `p_get_linhvuc`(
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_get_linhvuc`(
 	p_organization varchar(200),
 	p_loaithutuc varchar(20)
 )
@@ -5036,7 +5036,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-/*!50003 CREATE PROCEDURE `p_get_tinh`(
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_get_tinh`(
 )
 BEGIN
 	select * 
@@ -5050,7 +5050,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-/*!50003 CREATE PROCEDURE `p_get_url`(
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_get_url`(
 	p_loai_url varchar(20)
 )
 BEGIN
@@ -5066,7 +5066,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-/*!50003 CREATE PROCEDURE `p_get_xa`(
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_get_xa`(
 	p_id_huyen varchar(100)
 )
 BEGIN
@@ -5083,7 +5083,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-/*!50003 CREATE PROCEDURE `p_update_url_qrcode`(
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_update_url_qrcode`(
 	p_madonvi VARCHAR(150),
 	p_id_qr_code VARCHAR(150),
 	p_url text
@@ -5111,7 +5111,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-/*!50003 CREATE PROCEDURE `p_get_list_qr_code`(
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_get_list_qr_code`(
 	p_madonvi varchar(150)
 )
 BEGIN
@@ -5133,7 +5133,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-/*!50003 CREATE PROCEDURE `p_get_thongtin_qr_code`(
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_get_thongtin_qr_code`(
 	p_madonvi varchar(150),
 	p_id_qr_code varchar(150)
 )
@@ -5169,7 +5169,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-/*!50003 CREATE PROCEDURE `p_get_thutuc`(
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_get_thutuc`(
 	p_organization VARCHAR(200),
 	p_loaithutuc VARCHAR(20),
 	p_id_linhvuc VARCHAR(100)
@@ -5200,7 +5200,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-/*!50003 CREATE PROCEDURE `p_luu_thontin_qr_code`(
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_luu_thontin_qr_code`(
 	p_idcode VARCHAR(150),
 	p_madonvi varchar(150),
 	p_matinh varchar(150),
