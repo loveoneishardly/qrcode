@@ -3,10 +3,10 @@
     private static $instance;
     private $conn;
 
-    private $host = '127.0.0.1';
-    private $user = 'root';
+    private $host = '';
+    private $user = '';
     private $pass = '';
-    private $name = 'management_qrcode';
+    private $name = '';
 
     private function __construct()
     {
